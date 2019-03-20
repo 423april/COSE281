@@ -17,8 +17,8 @@ f2 = figure(2);
 set(f2, 'Units', 'pixels', 'Position', [0 0 700 700]);
 
 % plot a circle of radius 10 using 2 suitable functions f(x): y1, y2
-% y1 is upper half of circle
-% y2 is lower half of circle
+% y1 draws upper half of circle
+% y2 draws lower half of circle
 % circle is centered on (0, 0)
 % x's interval is between -10 & 10
 x = [-10 : .01 : 10]; 
@@ -32,13 +32,13 @@ y2 = -sqrt(100 - x.^2);
 % t2 = range of height of triangle
 % height = the height of triangle
 t1 = [0 : .01 : 10 * cosd(50)];  
-hypot = tand(50)*t1;
+hypot = tand(50) * t1;
 base = 0 * t1; 
 t2 = [0 : .01 : 10 * sind(50)]; 
 height = 10 * cosd(50) * (t2 / t2);
 
 % plot circle in red and triangle in blue
-plot(x,y1,'r',x,y2,'r', t1,hypot,'b',t1,base,'b', height * ones(size(t2)),t2,'b'); 
+plot(x, y1,'r', x, y2, 'r', t1, hypot, 'b', t1, base, 'b', height * ones(size(t2)), t2, 'b'); 
 
 % adds x & y (f(x)) labels
 xlabel('x'); ylabel('f(x)'); 
@@ -58,4 +58,4 @@ annotation('textarrow', anon_sin{:});
 
 %code to save figure into jpg file circle.jpg
 %saves plot image as circle.jpg to current directory 
-saveas(f2,'circle.jpg'); 
+saveas(f2, 'circle.jpg'); 
