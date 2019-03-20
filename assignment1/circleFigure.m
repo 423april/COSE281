@@ -1,5 +1,5 @@
 % ENGINEERING MATHEMATICS ASSIGNMENT 1 PROBLEM #2
-% STUDENT ID: 2015320143, 2018320250
+% STUDENT ID: 2015320143, 2016320128, 2018320250
 % This script plots a circle of radius 10 and a right-angle triangle with 
 % an angle of 50 degrees.The code also annotates the angle theta and 
 % cos & sin theta.
@@ -21,17 +21,27 @@ set(f2, 'Units', 'pixels', 'Position', [0 0 700 700]);
 % y2 is lower half of circle
 % circle is centered on (0, 0)
 % x's interval is between -10 & 10
-x = [-10:.01:10]; 
+x = [-10 : .01 : 10]; 
 y1 = sqrt(100 - x.^2);
 y2 = -sqrt(100 - x.^2);
-t1 = [0:.01:10*cosd(50)];  %length of the base of triangle
-y3 = tand(50)*t1;  %hypotenuse of triangle
-y4 = 0 * t1; %the base of the triangle
-y5 = [0:.01:10*sind(50)]; %range of height of triangle
-t2 = 10*cosd(50) *(y5/y5); % the height of triangle
-plot(x,y1,'r',x,y2,'r', t1,y3,'b',t1,y4,'b', t2*ones(size(y5)),y5,'b'); %plot circle in red and triangle in blue
-xlabel('x'); ylabel('f(x)'); % adds x & y (f(x)) labels 
 
+% code to plot the triangle
+% t1 = length of the base of triangle
+% hypot = hypotenuse of triangle
+% base = the base of the triangle
+% t2 = range of height of triangle
+% height = the height of triangle
+t1 = [0 : .01 : 10 * cosd(50)];  
+hypot = tand(50)*t1;
+base = 0 * t1; 
+t2 = [0 : .01 : 10 * sind(50)]; 
+height = 10 * cosd(50) * (t2 / t2);
+
+% plot circle in red and triangle in blue
+plot(x,y1,'r',x,y2,'r', t1,hypot,'b',t1,base,'b', height * ones(size(t2)),t2,'b'); 
+
+% adds x & y (f(x)) labels
+xlabel('x'); ylabel('f(x)'); 
 
 
 % code to show \theta
