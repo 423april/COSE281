@@ -13,12 +13,12 @@ clc
 f2 = figure(2);
 
 % set position property to bottom-left corner
-% set width 700 pixels and height 700 pixels 
+% set width to 700 pixels and height to 700 pixels 
 set(f2, 'Units', 'pixels', 'Position', [0 0 700 700]);
 
 % plot a circle of radius 10 using 2 suitable functions f(x): y1, y2
-% y1 draws upper half of circle
-% y2 draws lower half of circle
+% y1 is upper half of circle
+% y2 is lower half of circle
 % circle is centered on (0, 0)
 % x's interval is between -10 & 10
 x = [-10 : .01 : 10]; 
