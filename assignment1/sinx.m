@@ -21,16 +21,17 @@ set(f1, 'Units', 'pixels', 'Position', [0 0 600 400]);
 % supply x array w enough points to get smooth plotting behaviour
 % x has interval steps of 0.01 and has total 20001 points 
 
-x = [-100:.01:100];
-y = abs(sin(x)./x);
-plot(x,y);
+x = [-100 : .01 : 100];
+y = abs(sin(x) ./ x);
+plot(x, y);
 
 % adds x & y (f(x)) labels to the plot
-xlabel('x'); ylabel('f(x)'); 
+xlabel('x'); 
+ylabel('f(x)'); 
  
 %code to save figure into png file sinc.png
 %saves plot image as sinc.png to current directory 
-saveas(f1,'sinc.png'); 
+saveas(f1, 'sinc.png'); 
 
 
 % Questions
@@ -60,8 +61,8 @@ a2 = limit(s, t, Inf);
 a3 = limit(s, t, -Inf);
 
 % print with fprintf & nice explanation text 
-fprintf('The value of limit(x to 0) (abs(sin(x)/x)) is %d\n',a1);
-fprintf('The value of limit(x to positive infinity) (abs(sin(x)/x)) is %d\n',a2);
-fprintf('The value of limit(x to negative infinity) (abs(sin(x)/x)) is %d\n',a3);
+fprintf('The value of limit(x to 0) (abs(sin(x)/x)) is %d\n', a1);
+fprintf('The value of limit(x to positive infinity) (abs(sin(x)/x)) is %d\n', a2);
+fprintf('The value of limit(x to negative infinity) (abs(sin(x)/x)) is %d\n', a3);
 
 
