@@ -14,7 +14,7 @@ load dataForTesting
 data = fixData(data);
 %creates figure
 f3 = figure(3);
-set(f3, 'Units', 'pixels', 'Position', [100 100 800 600]);
+set(f3, 'Units', 'pixels', 'Position', [0 0 1000 1000]);
  
 %subplots
 red_col = [6 8 13];
