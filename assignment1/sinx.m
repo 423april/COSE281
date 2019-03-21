@@ -1,47 +1,52 @@
-% ENGINEERING MATHEMATICS ASSIGNMENT 1 PROBLEM #1
-% STUDENT ID: 2015320143, 2016320128, 2018320250
-% This script plots function f(x) = abs(sin(x)/x) in the interval
-% -100 <= x <= 100. The script also calculates and prints out the values 
-% of limit to 0 and positive & negative infinity for f(x).
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 1 PROBLEM #1
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
+
+% This script plots the function f(x) = abs(sin(x) ./ x) over the interval
+% -100 <= x <= 100. The script also calculates and prints out the limit as
+% the function approaches 0, positive infinity and negative infinity.
 
 
-% code to clear all workspace, all figures and output window of Matlab
+% close all figures, clear the workspace and output
+% window of Matlab.
 clear all
 close all
 clc
 
-% create numbered figure variable named f1
+% create figure f1 with the Number property set to 1.
 f1 = figure(1);
 
-% set position property to bottom-left corner
-% set width to 600 pixels and height to 400 pixels 
+% set the position of f1 as the bottom-left corner and set the width and
+% height of the figure to be 600 pixels and 400 pixels respectively.
 set(f1, 'Units', 'pixels', 'Position', [0 0 600 400]);
 
-% plot function f(x) = abs(sin(x)/x) in interval -100<=x<=100
-% supply x array w enough points to get smooth plotting behaviour
-% x has interval steps of 0.01 and has total 20001 points 
-
+% plot the function f(x) = abs(sin(x) ./ x) over the interval -100 <= x <=
+% 100 and supply array x with enough points to get a smooth plotting
+% behaviour.
+% x is a regularly-spaced vector using 0.01 as the increment between
+% elements for a total of 20001 points.
+% y is a vector that holds the corresponding y-axis values for y = f(x).
 x = [-100 : .01 : 100];
 y = abs(sin(x) ./ x);
 plot(x, y);
 
-% adds x & y (f(x)) labels to the plot
-xlabel('x'); 
-ylabel('f(x)'); 
+% add axis labels 'x' and 'f(x)' to the x and y axes respectively.
+xlabel('x');
+ylabel('f(x)');
  
-%code to save figure into png file sinc.png
-%saves plot image as sinc.png to current directory 
-saveas(f1, 'sinc.png'); 
+% save figure to a PNG file named sinc.png
+saveas(f1, 'sinc.png');
 
 
 % Questions
 % 1a) Based on the plot, what seems to be the value of f(0)?
-% --> The value of f(0) seems to be 1 based on the plot.
+% Ans: The value of f(0) seems to be 1 based on the plot.
+% 
 % 1b) Why am I asking about this value?
-% --> If we substitute x with 0 in the given function
-% f(x)=abs(sin(x)/x), it will be f(0) = abs(sin(0)/0), which will be
-% undefined because we cannot divide by 0.But we seem to have a value based
-% on the graph.
+% Ans: If we substitute x with 0 in the given function, 
+% f(x) = abs(sin(x) / x), we see that f(0) = abs(sin(0) / 0), which is
+% undefined since we divide by 0. But we seem to have a value based on the
+% graph.
+%
 % 2) Based on the plot, what seems to be the value of
 % lim(x-->+-infinity)f(x)?
 % --> Based on the plot, the values of both f(x) to the limit of positive &
