@@ -59,7 +59,7 @@ syms t
 s = abs(sin(t) / t);
 
 % check the limits for the 3 cases mentioned in 1a) and 2).
-% save the values into lim_zero, lim_pos_inf amd lim_neg_inf respectively.
+% save the values into lim_zero, lim_pos_inf and lim_neg_inf respectively.
 lim_zero = limit(s, t, 0);
 lim_pos_inf = limit(s, t, Inf);
 lim_neg_inf = limit(s, t, -Inf);
