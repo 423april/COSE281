@@ -1,6 +1,5 @@
 % COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 1 PROBLEM #1
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
-
 % This script plots the function f(x) = abs(sin(x) ./ x) over the interval
 % -100 <= x <= 100. The script also calculates and prints out the limit as
 % the function approaches 0, positive infinity and negative infinity.
@@ -44,30 +43,30 @@ saveas(f1, 'sinc.png');
 % 1b) Why am I asking about this value?
 % Ans: If we substitute x with 0 in the given function, 
 % f(x) = abs(sin(x) / x), we see that f(0) = abs(sin(0) / 0), which is
-% undefined since we divide by 0. But we seem to have a value based on the
-% graph.
-%
-% 2) Based on the plot, what seems to be the value of
-% lim(x-->+-infinity)f(x)?
-% --> Based on the plot, the values of both f(x) to the limit of positive &
-% negative inifinity seem to be 0.
+% undefined since we perform division by 0. But we seem to have a value
+% based on the graph.
+% 
+% 2) Based on the plot, what seem to be the limits of f(x) as x approaches
+% positve and negative infinity?
+% Ans: Based on the plot, the limits of f(x) as x approaches postive and
+% negative infinity both seem to be 0.
 
 
-% define symbolic variable t
+% define symbolic variable t.
 syms t
 
-% define f(x) symbolically by variable s
-s = abs(sin(t)/t);
+% define s symbolically as f(t), a function of t.
+s = abs(sin(t) / t);
 
-% check limits for 3 cases in 1a & 2
-% save the values in a1, a2, a3 in that order
-a1 = limit(s, t, 0);
-a2 = limit(s, t, Inf);
-a3 = limit(s, t, -Inf);
+% check the limits for the 3 cases mentioned in 1a) and 2).
+% save the values in a1, a2 and a3 respectively.
+lim_zero = limit(s, t, 0);
+lim_pos_inf = limit(s, t, Inf);
+lim_neg_inf = limit(s, t, -Inf);
 
-% print with fprintf & nice explanation text 
-fprintf('The value of limit(x to 0) (abs(sin(x)/x)) is %d\n', a1);
-fprintf('The value of limit(x to positive infinity) (abs(sin(x)/x)) is %d\n', a2);
-fprintf('The value of limit(x to negative infinity) (abs(sin(x)/x)) is %d\n', a3);
+% print results with nice explanation text to command window with fprintf.
+fprintf('The limit of f(x) = abs(sin(x) / x) as x approaches 0 is %d\n', lim_zero);
+fprintf('The limit of f(x) = abs(sin(x) / x) as x approaches positive infinity is %d\n', lim_pos_inf);
+fprintf('The limit of f(x) = abs(sin(x) / x) as x approaches negative infinity is %d\n', lim_neg_inf);
 
 
