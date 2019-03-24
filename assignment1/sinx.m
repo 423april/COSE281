@@ -1,6 +1,7 @@
 % COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 1 PROBLEM #1
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
-% This script plots the function f(x) = abs(sin(x) ./ x) over the interval
+% 
+% This script plots the function f(x) = abs(sin(x) / x) over the interval
 % -100 <= x <= 100. The script also calculates and prints out the limit as
 % the function approaches 0, positive infinity and negative infinity.
 
@@ -18,7 +19,7 @@ f1 = figure(1);
 % height of the figure to be 600 pixels and 400 pixels respectively.
 set(f1, 'Units', 'pixels', 'Position', [0 0 600 400]);
 
-% plot the function f(x) = abs(sin(x) ./ x) over the interval -100 <= x <=
+% plot the function f(x) = abs(sin(x) / x) over the interval -100 <= x <=
 % 100 and supply array x with enough points to get a smooth plotting
 % behaviour.
 % x is a regularly-spaced vector using 0.01 as the increment between
