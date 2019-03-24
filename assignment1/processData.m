@@ -3,7 +3,7 @@
 % 
 % This script loads dataForTesting.mat. Then, it calls the fixData function
 % to clean the data. After cleaning data, the script plots 13 scatter plots
-% based on the data. 
+% based on the data.
 
 
 % close all figures, clear the workspace and output window of Matlab.
