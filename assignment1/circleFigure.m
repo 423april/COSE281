@@ -1,5 +1,5 @@
-% ENGINEERING MATHEMATICS ASSIGNMENT 1 PROBLEM #2
-% STUDENT ID: 2015320143, 2016320128, 2018320250
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 1 PROBLEM #2
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
 % This script plots a circle of radius 10 and a right-angle triangle with 
 % an angle of 50 degrees.The code also annotates the angle theta and 
 % cos & sin theta.
@@ -56,6 +56,6 @@ annotation('textarrow', anon_cos{:});
 anon_sin = {[16/20 15.5/20],  [13/20 13/20], 'String', 'sin \theta', 'LineWidth', 0.3, 'HeadWidth', 5, 'HeadLength', 5};
 annotation('textarrow', anon_sin{:});
 
-%code to save figure into jpg file circle.jpg
-%saves plot image as circle.jpg to current directory 
+% code to save figure into jpg file circle.jpg
+% saves plot image as circle.jpg to current directory 
 saveas(f2, 'circle.jpg'); 
