@@ -1,5 +1,5 @@
-% ENGINEERING MATHEMATICS ASSIGNMENT 1 PROBLEM #3
-% STUDENT ID: 2015320143, 2016320128, 2018320250
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 1 PROBLEM #3
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
 % This script loads dataForTesting.mat.Then, it calls fixData function to
 % clean the data. After cleaning data, the script plots 13 scatter plots
 % based on the data. 
