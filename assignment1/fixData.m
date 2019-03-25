@@ -6,8 +6,15 @@
 %   dimensions of 206-by-14 and fixes the input such that all values in the
 %   data are positive or 0 by deleting rows with negative or NaN values.
 %   
-%   Example: Fix the data in variable DATA and save the output back into
-%   DATA.
+%   INPUT:
+%       DATA: 206-by-14 data input. Minimum error handling is performed.
+%
+%   OUTPUT:
+%       DATA: The result after the data input is fixed. Rows with NaN and
+%             negative values are removed. 
+%
+%   EXAMPLE: Fix the data in variable DATA and save the output back into
+%            DATA.
 %
 %       DATA = fixData(DATA);
 
