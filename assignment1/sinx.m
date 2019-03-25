@@ -6,8 +6,8 @@
 % the function approaches 0, positive infinity and negative infinity.
 
 
-% close all figures, clear the workspace and output
-% window of Matlab.
+% clear the workspace, close all figures and clear the 
+% output window of Matlab.
 clear all
 close all
 clc
