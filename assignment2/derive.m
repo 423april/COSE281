@@ -26,7 +26,7 @@ if (nargin == 2)
     h = 1e-5;
 end
 % this does the job also for arrays of inputs
-derivative = (function_handle(x_values + h)-function_handle(x_values))/h;
+derivative = (function_handle(x_values + h) - function_handle(x_values)) / h;
 
 
 
