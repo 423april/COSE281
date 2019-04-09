@@ -15,7 +15,9 @@
 
 function [integral] = integrate(function_handle, x_values, h, type)
 
-% if we only have two input arguments, fall back to default
+% The third argument h should be optional
+% The fourth argument type should be optional. If not supplied, set to
+% 'trapezoid'.
 if ~exist('h', 'var')
     h = 1e-5;
 end
@@ -24,18 +26,24 @@ if ~exist('type', 'var')
 end
 
 
-% this does the job also for arrays of inputs
-
+% The fourth argument type is a string (or char array) with possible values ‘trapezoid’ and ’midpoint’
+% The function should evaluate the integral for each PAIR of SUCCESSIVE x-values 
+% and so will return length(x_values)-1 values
 if(strcmp(type, 'trapezoid') == 1)
-    area = 0;
-    for x = 1: length(x_values)
-        area = area + (x_values(x+1)-x_vlaues(x))/2*(function_handle(x_values(x+1))+f(x_values(x))); 
+    for x = 1: length(x_values) - 1
+        % guarantee that h < average_i(x_i+1 - x_i) and throw an error if it doesn’t
+        assert(h < x_values(x+1) - x_values(x));  % not sure if this is right
+        
+        % evaluate the integral for each PAIR of SUCCESSIVE x-values 
+        area(x) = (x_values(x+1)-x_vlaues(x))/2*(function_handle(x_values(x+1))+f(x_values(x))); 
     end
+    % return length(x_values)-1 values
     integral = area;
+    
 elseif(strcmp(type, 'midpoint') == 1)
-    area = 0;
-    for x = 1: length(x_values)
-        area = area + ((x_values(x+1) - x_values(x)) * function_handle((x_values(x+1) + x_values(x))/2));
+    for x = 1: length(x_values) - 1
+        assert(h < x_values(x+1) - x_values(x));
+        area(x) = area + ((x_values(x+1) - x_values(x)) * function_handle((x_values(x+1) + x_values(x))/2));
     end
     integral = area;
 end
