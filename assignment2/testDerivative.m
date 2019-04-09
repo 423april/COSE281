@@ -3,7 +3,8 @@
 % 
 % This script plots the SSE for all points summed up for 
 % h = 10^[-1 : -1 :-14] and x_values = [0.001 : 0.01 : 2] for 
-% the following functions: f(x) = x^2, f(x) = cos(x), f(x) = sin(x)/x.
+% the derivatives of following functions: f(x) = x^2, f(x) = cos(x), 
+% f(x) = sin(x)/x.
 
 
 % clear the workspace, close all figures and clear the output window 

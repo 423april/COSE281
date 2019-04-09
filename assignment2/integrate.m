@@ -2,9 +2,9 @@
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
 % integrate(function_handle, x_values, h, type) implements numerical
-% integration on a known function. The function evaluates the approximate 
-% integral for each pair of successive x-values using trapezoid or midpoint
-% rule. It returns length(x_values) - 1 values. 
+% integration on a known function. The function evaluates the trapezoidal
+% or midpoint integral approximation for each pair of successive x-values.
+% It returns length(x_values) - 1 values. 
 % If h >= average_i (x_(i+1) - x_i), the function throws an error.
 %
 %   INPUT:
@@ -12,19 +12,22 @@
 %       x_values: array of x values
 %       h: optional, if not supplied should be set to h = 1e - 5
 %       type: optional, can be 'trapezoid' or 'midpoint' for respective
-%             integration rule, if not supplied set to 'trapezoid'
+%             integral approximatio rule, if not supplied set to 'trapezoid'
 %
 %   OUTPUT:
 %       integral: array of integrals for each pair of successive x-values, 
 %                 number of array elements is length(x_values) - 1
 %
-%   EXAMPLE: do a trapezoidal derivation for f = @(x) x^2, 
+%   EXAMPLE: do a trapezoidal integral approximation for f = @(x) x^2, 
 %            x_values = [0.001 : 0.1 : 2]. Save the return value to
 %            variable integral
 %
 %       integral = integrate(f, x_values)
 
 function [integral] = integrate(function_handle, x_values, h, type)
+
+% %% the guideline says to check val nargin but not sure how that'll work
+% for when h's missing but type's not
 
 % third argument h is optional. if not supplied, set to 1e-5
 if ~exist('h', 'var')
@@ -36,7 +39,7 @@ if ~exist('type', 'var')
     type = 'trapezoid';
 end
 
-% if type == 'trapezoid', use trapezoid rule to approximate the integral
+% if type == 'trapezoid', do trapezoidal integral approximation
 if(strcmp(type, 'trapezoid') == 1)
     for i = 1: length(x_values) - 1
         % guarantee that h < average_i(x_i+1 - x_i) and throw an error if it doesn’t
@@ -48,7 +51,7 @@ if(strcmp(type, 'trapezoid') == 1)
     % return length(x_values)-1 values
     integral = area;
     
-% if type == 'midpoint', use midpoint rule to approximate the integral
+% if type == 'midpoint', do midpoint integral approximation
  elseif(strcmp(type, 'midpoint') == 1)
     for i = 1: length(x_values) - 1
         assert(h < x_values(i+1) - x_values(i));
