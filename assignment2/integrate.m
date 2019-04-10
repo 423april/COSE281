@@ -12,7 +12,7 @@
 %       x_values: array of x values
 %       h: optional, if not supplied should be set to h = 1e - 5
 %       type: optional, can be 'trapezoid' or 'midpoint' for respective
-%             integral approximatio rule, if not supplied set to 'trapezoid'
+%             integral approximation rule, if not supplied set to 'trapezoid'
 %
 %   OUTPUT:
 %       integral: array of integrals for each pair of successive x-values, 
