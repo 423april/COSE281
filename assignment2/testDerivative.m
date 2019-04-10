@@ -52,7 +52,7 @@ semilogy(err2)
 
 % define f3 as sin(x) / x and g as derivative of f3, 
 % g(x) = f3'(x) = (x * cos(x) - sin(x)) / x^2
-f3 = @(x) sin(x) / x
+f3 = @(x) sin(x)./ x
 g = @(x) (x .* cos(x) - sin(x)) ./ (x .^ 2);
 
 % go through each element and calculate SSE of all points
