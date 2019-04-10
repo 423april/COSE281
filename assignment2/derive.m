@@ -30,6 +30,6 @@ end
 % this does the job also for arrays of inputs
 derivative = (function_handle(x_values + h) - function_handle(x_values)) / h;
 
-
+end
 
 
