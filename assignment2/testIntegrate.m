@@ -1,10 +1,10 @@
 % COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 2 PROBLEM #1
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
-% testIntegrate.m:
 % This script plots the SSE for all points summed up for h = 10^[-2 : -1 :
-% -7] and x_values = [0.001 : 0.1 : 2] for the following function: 
-% f(x) = x^2 for both trapezoid and midpoint integration.
+% -7] and x_values = [0.001 : 0.1 : 2] for both trapezoidal and midpoint
+% integral approximations of the following function: f(x) = x^2 
+
 
 % clear the workspace, close all figures and clear the output window 
 % of Matlab.
@@ -20,25 +20,35 @@ x_values = [0.001 : 0.1 : 2];
 syms x
 f = @(x) x.^2;
 
+% calculate the definite integral. definite integral of x^2 is x^3/3
 for k = 1 : length(x_values) - 1
     defint(k) = x_values(k + 1) .^3 .*(1/3) - x_values(k) .^3 .*(1/3);
 end
 
-% plot the trapezoid integration for  f(x) = x^2
+% go through each element and calculate SSE of all points for trapezoidal
+% integral approximation and save the values to err1
 for i = 1 : length(h)
-    
     err1(i) = sum((defint - integrate(f, x_values, h(i), 'trapezoid')).^2);
 end
-%err = sum((1/3) .* x_values .^3 - trapz(, f));
+
+% plot err1 in a LOG plot
 semilogy(err1);
 
+% display grid lines, label x & y-axes, and retain plot in current axes
+grid on
+xlabel('h'); 
+ylabel('SSE [log scale]');
 hold on
 
-% plot the trapezoid integration for  f(x) = x^2
-
-
+% go through each element and calculate SSE of all points for midpoint
+% integral approximation
 for i = 1 : length(h)
     err2(i) = sum((defint - integrate(f, x_values, h(i), 'midpoint')).^2);
 end
-%err = sum((1/3) .* x_values .^3 - trapz(, f));
-%plot(h, err2);
+
+% plot err2 in a LOG plot
+semilogy(err2);
+
+% Questions
+% 1) What happens to the error curves as h becomes smaller and why?
+% 2) Which integration method is better? 
