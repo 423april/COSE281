@@ -31,22 +31,28 @@ end
 % and so will return length(x_values)-1 values
 if(strcmp(type, 'trapezoid') == 1)
     area = zeros(1, length(x_values));
-    for x = 1: length(x_values) - 1
+    for i = 1: length(x_values) - 1
         % guarantee that h < average_i(x_i+1 - x_i) and throw an error if it doesn’t
-        dif = x_values(x+1) - x_values(x);
+        dif = x_values(i+1) - x_values(i);
         assert(h < dif);  % not sure if this is right
-        
-        % evaluate the integral for each PAIR of SUCCESSIVE x-values 
-        area(x) = (x_values(x+1)-x_values(x))/2*(function_handle(x_values(x+1))+function_handle(x_values(x))); 
+        area(i) = 0;
+        for j = x_values(i): h: x_values(i+1)
+            area(i) = area(i) + h ./ 2 .* (function_handle(j + h)+function_handle(j)); 
+        end
     end
     % return length(x_values)-1 values
     integral = area;
     
 elseif(strcmp(type, 'midpoint') == 1)
-    area = zeros(1, length(x_values));
-    for x = 1: length(x_values) - 1
-        assert(h < x_values(x+1) - x_values(x));
-        area(x) = area + ((x_values(x+1) - x_values(x)) * function_handle((x_values(x+1) + x_values(x))/2));
+        area = zeros(1, length(x_values));
+    for i = 1: length(x_values) - 1
+        % guarantee that h < average_i(x_i+1 - x_i) and throw an error if it doesn’t
+        dif = x_values(i+1) - x_values(i);
+        assert(h < dif);  % not sure if this is right
+        area(i) = 0;
+        for j = x_values(i): h: x_values(i+1)
+            area(i) = area(i) + h * function_handle(((j + h) + j)/2);
+        end
     end
     integral = area;
 end
