@@ -3,7 +3,7 @@
 % 
 % derive(function_handle, x_values, h) implements numerical derivation on a
 % known function using the standard numerical approximation of the
-% derivative, f'(x) = (f(x+h) - f(x)) / h, where h is very small.
+% derivative, f'(x) = (f(x+h) - f(x)) / h, with h very small.
 %   
 %   INPUT:
 %       function_handle: variable representing function
@@ -22,14 +22,14 @@
 
 function [derivative] = derive(function_handle, x_values, h)
 
-% if we only have two input arguments, h is set to default value 1e-5
+% if we only have two input arguments, fall back to default
 if (nargin == 2)
     h = 1e-5;
 end
 
+% For given input function_handle and x_values, calculates the derivative
+% with small steps h, and returns an array of numerical derivatives.
 % this does the job also for arrays of inputs
 derivative = (function_handle(x_values + h) - function_handle(x_values)) / h;
 
 end
-
-
