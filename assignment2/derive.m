@@ -15,7 +15,7 @@
 %                   derivative for x_values
 %
 %   EXAMPLE: do a numerical derivation for f = @(x) x^2,  
-%            x_values = [0.001 : 0.1 : 2] & h = 10^[-1 : -1 : -14]
+%            x_values = [0.001 : 0.1 : 2] & h = 1e-5
 %            and save the result to variable derivative
 %
 %       derivative = derive(f, x_values, h);
