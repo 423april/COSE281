@@ -24,7 +24,7 @@ syms x
 f = @(x) x.^2;
 
 % go through each element and calculate SSE of all points
-% f'(x) = 2x and save the value to variable err
+% f'(x) = 2x
 for i = 1 : length(h)
     err(i) = sum((2 * x_values - derive(f, x_values, h(i))).^2);
 end
@@ -42,12 +42,12 @@ hold on
 f2 = @(x) cos(x)
 
 % go through each element and calculate SSE of all points
-% f2'(x) = -sin(x) and save the value to variable err2
+% f2'(x) = -sin(x)
 for i = 1 : length(h)
     err2(i) = sum((-1 * sin(x_values) - derive(f2, x_values, h(i))).^2);
 end
 
-% plot err2 in a LOG plot
+% plot err2 
 semilogy(err2)
 
 % define f3 as sin(x) / x and g as derivative of f3, 
@@ -56,16 +56,24 @@ f3 = @(x) sin(x)./ x
 g = @(x) (x .* cos(x) - sin(x)) ./ (x .^ 2);
 
 % go through each element and calculate SSE of all points
-% and save the value to variable err3
 for i = 1 : length(h)
     err3(i) = sum((g(x_values) - derive(f3, x_values, h(i))).^2);
 end
 
-% plot err3 in a LOG plot
+% plot err3 
 semilogy(err3)
 
+% shows which line is which function's error curve
+legend({'x^2','cosx', 'sinx/x'},'location','northeast')
 
 % Questions
 % 1) Why do the error curves first go down then up again?
+%   At first, as the size of h decreases, the error of the derivative
+%   decreases. But after a h = 10^(-8), the computer cannot properly
+%   compute the small numbers. This is because the computer handles double
+%   values by formulaic representation, which leads to floating point
+%   error. We cannot acheive a derivative with error less than 10^(-14)
+%   because of this error. 
 % 2) Why do you think that the error curves for the three functions are
 % different? 
+%   
