@@ -1,4 +1,4 @@
-% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 2 PROBLEM #2
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 2 PROBLEM #1
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
 % testIntegrate.m:
@@ -31,18 +31,21 @@ for i = 1 : length(h)
 end
 % plots err1 in a LOG plot
 semilogy(err1);
+% plot(h, err1);
 
 % display grid lines, label x & y-axes, and retain plot in current axes
 grid on
 xlabel('h'); 
 ylabel('SSE [log scale]');
-hold on
+hold on;
 
 for i = 1 : length(h)
     err2(i) = sum((defint - integrate(f, x_values, h(i), 'midpoint')).^2);
 end
 % plots err2 in a LOG plot
 semilogy(err2);
+% plot(h, err2);
+% set(gca, 'yscale', 'log'); 
 
 % shows which line is which function's error curve
 legend({'trapezoid','midpoint'},'location','northeast')
@@ -54,4 +57,6 @@ legend({'trapezoid','midpoint'},'location','northeast')
 %   also decreases. Thus, the function becomes more precise and the error
 %   decreases.
 % 2) Which integration method is better?
+%   The trapezoidal integration method has slightly higher error than the midpoint
+%   integration method. Thus, the midpoint integration method is better.
 
