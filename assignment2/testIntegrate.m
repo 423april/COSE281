@@ -30,8 +30,7 @@ for i = 1 : length(h)
     err1(i) = sum((defint - integrate(f, x_values, h(i), 'trapezoid')).^2);
 end
 % plots err1 in a LOG plot
-semilogy(err1);
-% plot(h, err1);
+ semilogy(err1);
 
 % display grid lines, label x & y-axes, and retain plot in current axes
 grid on
@@ -43,9 +42,7 @@ for i = 1 : length(h)
     err2(i) = sum((defint - integrate(f, x_values, h(i), 'midpoint')).^2);
 end
 % plots err2 in a LOG plot
-semilogy(err2);
-% plot(h, err2);
-% set(gca, 'yscale', 'log'); 
+ semilogy(err2);
 
 % shows which line is which function's error curve
 legend({'trapezoid','midpoint'},'location','northeast')
@@ -57,6 +54,9 @@ legend({'trapezoid','midpoint'},'location','northeast')
 %   also decreases. Thus, the function becomes more precise and the error
 %   decreases.
 % 2) Which integration method is better?
-%   The trapezoidal integration method has slightly higher error than the midpoint
-%   integration method. Thus, the midpoint integration method is better.
+%   Although the graph doesn't seem to show the difference of the two SSEs'
+%   on first sight, when you use the magnifying tool and look closer, there
+%   are two lines. The trapezoidal integration method has slightly 
+%   higher error than the midpoint integration method. 
+%   Thus, the midpoint integration method is better.
 
