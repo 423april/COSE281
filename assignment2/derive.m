@@ -23,13 +23,13 @@
 
 function [derivative] = derive(function_handle, x_values, h)
 
-% Use h = 1e-5 if only two arguments are passed to the function.
-if (nargin == 2)
+% use h = 1e-5 if only two arguments are passed to the function
+if nargin == 2
     h = 1e-5;
 end
 
-% Using function_handle and x_values, calculate the derivative numerically
-% for some small h, then save the results of the operation into an array.
+% using function_handle and x_values, calculate the derivative numerically
+% for some small h, then save the results of the operation into an array
 derivative = (function_handle(x_values + h) - function_handle(x_values)) / h;
 
 end

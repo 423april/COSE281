@@ -1,44 +1,42 @@
 % COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 2 PROBLEM #3
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
-% SI(x,n) implements Taylor series to compute sin(x) and devide it by x,
-% in order to calculate the integral of the sinc-function.
+% SI(x,n) calculates the definite integral of the sinc-function over a
+% given interval by using an expression obtained by dividing the Taylor
+% series of sin(x) by x and integrating the result term-by-term up to a
+% given degree.
 %   
 %   INPUT:
-%       x: array of x values
-%       n: the degree of the Taylor approximation. This is optional, the
+%       x: array representing the lower and upper limits of the integration
+%       interval.
+%       n: the degree of the Taylor approximation. This is optional; the
 %       default value is n = 10.
 %
 %   OUTPUT:
-%       integral = an array of definite integral of the sinc-function for
-%       x_values
+%       integral: the definite integral obtained.
 %
-%   EXAMPLE: do a definite integral for the sinc-function. 
-%           x = [0.5: 0.01: 15], n = 15
+%   EXAMPLE: Perform integration of sin(x) / x over the interval [0.5, 15]. 
+%           x = [0.5 15], n = 15
 %
 %       integral = SI(x, n)
 
 function [integral] = SI(x, n)
-    % if n is not given, the default value of n is 10.
-    if(nargin == 1)
+    % set n to its default value, 10, if n is not given
+    if nargin == 1
         n = 10;
     end
     
-    % a is the lower end of the integral section.
-    % b is the higher end of the integral section.
-    % k is a counter for the degree.
-    a = 0;
-    b = 0;
-    k = 0;
+    % preallocate antiderivate, an array representing the antiderivative
+    % at the lower and upper limits
+    antiderivative = zeros(1, 2);
     
-    % computes the integral of the polynomial representation of sin(x)/x
-    % for each end of the given array.
-    while (k < n)
-        a = a + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(1) .^ (2 * k + 1);
-        b = b + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(2) .^ (2 * k + 1);
-        k = k + 1;
+    % compute the Taylor polynomial of the integral of sin(x) / x using the
+    % Taylor series of the antiderivative of sin(x) / x obtained
+    % algebraically.
+    for k = 0 : 1 : n
+        antiderivative = antiderivative + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x .^ (2 * k + 1);
     end
     
-    % returns the integral value from a to b.
-    integral = b - a;
+    % compute the actual definite integral
+    integral = antiderivative(2) - antiderivative(1);
 end

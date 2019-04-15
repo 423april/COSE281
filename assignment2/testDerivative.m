@@ -61,6 +61,8 @@ legend({'x^2','cosx', 'sinx/x'},'location','northeast')
 %   results in the error increasing. Hence, we cannot achieve a derivative
 %   with error less than 10^(-15).
 % 2) Why do you think that the error curves for the three functions are
-% different? 
-%   The errors are arbitrary values as the accuracy and precision of
-%   floating point calculations are limited.
+% different?
+%   The error curves of the three functions are different as the different
+%   values of the functions produce arbitrarily but somewhat
+%   deterministically different error values since the precision and
+%   accuracy of floating point arithmetic are limited.

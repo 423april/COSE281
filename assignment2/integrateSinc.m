@@ -13,7 +13,7 @@ clear all
 close all
 clc
 
-% define f as a symbolic function of x.
+% define f as a symbolic function of x
 syms x
 f = @(x) sin(x) / x;
 
@@ -53,6 +53,7 @@ xlabel('n');
 
 % Question
 % 1) Which method would you choose and why?
-%   The first way is preferrable as the errors are significantly smaller
-%   even for larger values of h. Whereas the method using Taylor series
-%   needs high degree(at least n = 20) in order to get results with small errors.
+%   The first method is preferable as the errors are significantly smaller
+%   even for larger values of h, whereas the method which uses the Taylor
+%   series approximation requires the Taylor approximation to be of a high
+%   degree (at least n = 18) in order to obtain results with small errors.
