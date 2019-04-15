@@ -28,20 +28,23 @@ function [integral] = integrate(function_handle, x_values, h, type)
 % The third argument h should be optional. If not supplied, set to 1e-5.
 % The fourth argument type should be optional. If not supplied, set to
 % 'trapezoid'.
-if ~exist('h', 'var')
-    h = 1e-5;
-end
-if ~exist('type', 'var')
-    type = 'trapezoid';
+
+if (nargin ~= 4)
+    if ~exist('h', 'var')
+        h = 1e-5;
+    end
+    if ~exist('type', 'var')
+        type = 'trapezoid';
+    end
 end
 
 % error handling to guarantee that h is smaller than the averave of 
-% every differece of x_i+1 - x_i
+% every difference of x_i+1 - x_i
 difsum = 0;
 for k = 1: length(x_values) - 1
-    difsum = difsum + x_values(k+1) - x_values(k);
+    difsum = difsum + x_values(k + 1) - x_values(k);
 end
-avgdif = difsum/(length(x_values)-1);
+avgdif = difsum / (length(x_values) - 1);
 assert(h < avgdif);
 
 % The fourth argument type is a string (or char array) with possible values ‘trapezoid’ and ’midpoint’
@@ -62,7 +65,7 @@ if(strcmp(type, 'trapezoid') == 1)
     integral = area;
     
 elseif(strcmp(type, 'midpoint') == 1)
-        area = zeros(1, length(x_values) - 1);
+    area = zeros(1, length(x_values) - 1);
     % computes the integral for every interval
     for i = 1: length(x_values) - 1
         % compute the area of each the box with length h, height function_handle(midpoint)

@@ -14,16 +14,35 @@ clear all
 close all
 clc
 
-% define h, x_values, n
-h = 10^[-2: -1: -7];
-x_values = [0.5: 0.1: 15]; % hw guide didn't specify steps so I just gave if 0.1
+% define f as a symbolic function of x.
+syms x
+f = @(x) sin(x) / x;
+
+% define h, x_values and n
+h = 10.^[-2: -1: -7];
+x_values = [0.5: 0.1: 15];
+x = [0.5 15];
 n = [10: 2: 20];
+si = zeros(2, 6);
 
+% calculate using the first method
 for i = 1 : length(h)
-    num_int(i) = integrate(f, x_values, h(i));
+    si(1, i) = sum(integrate(f, x_values, h(i), "midpoint"));
 end
 
-for j = 1: length(n)
-    def_int(j) = SI(x_values, j);
+% calculate using the second method
+for i = 1 : length(n)
+    si(2, i) = SI(x, n(i));
 end
 
+% plot necessary plots
+subplot(1, 2, 1);
+scatter(n, si(1, :));
+
+subplot(1, 2, 2);
+scatter(h, si(2, :));
+
+% Question
+% 1) Which method would you choose and why?
+%   The second way is more preferrable as the errors are smaller earlier.
+%   Moreover, the amount of calculation required is immensely less.

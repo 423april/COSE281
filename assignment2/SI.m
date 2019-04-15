@@ -23,12 +23,15 @@ function [integral] = SI(x, n)
         n = 10;
     end
     
-    for i = 1: length(x) - 1
-        for k = 1: n
-            int(i) = int(i) + ((-1)^k ./ factorial(2 .* k + 1)) .* i .^ (2 * k + 1);
-        end
-        int(i) = int(i) ./ i;
-    end
+    a = 0;
+    b = 0;
+    k = 0;
     
-    return int;
+    while (k < n)
+        a = a + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(1) .^ (2 * k + 1);
+        b = b + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(2) .^ (2 * k + 1);
+        k = k + 1;
+    end
+    integral = b - a;
+    fprintf("integral:%d\n", integral);
 end
