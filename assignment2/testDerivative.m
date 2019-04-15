@@ -63,6 +63,4 @@ legend({'x^2','cosx', 'sinx/x'},'location','northeast')
 % 2) Why do you think that the error curves for the three functions are
 % different? 
 %   The errors are arbitrary values as the accuracy and precision of
-%   floating point calculations are limited. Moreover, computing sin(x) and
-%   cos(x) requires 
-%   
+%   floating point calculations are limited.

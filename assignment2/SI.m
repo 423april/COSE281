@@ -32,6 +32,6 @@ function [integral] = SI(x, n)
         b = b + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(2) .^ (2 * k + 1);
         k = k + 1;
     end
+    
     integral = b - a;
-    fprintf("integral:%d\n", integral);
 end
