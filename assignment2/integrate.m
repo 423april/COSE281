@@ -38,14 +38,16 @@ if (nargin ~= 4)
     end
 end
 
-% error handling to guarantee that h is smaller than the averave of 
+% error handling to guarantee that h is smaller than the average of 
 % every difference of x_i+1 - x_i
 difsum = 0;
 for k = 1: length(x_values) - 1
     difsum = difsum + x_values(k + 1) - x_values(k);
 end
 avgdif = difsum / (length(x_values) - 1);
-assert(h < avgdif);
+if (h < avgdif) == false
+        error('h is smaller than the average of every difference of x_i+1 - x_i');
+end
 
 % The fourth argument type is a string (or char array) with possible values ‘trapezoid’ and ’midpoint’
 % The function should evaluate the integral for each PAIR of SUCCESSIVE x-values 
