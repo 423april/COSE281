@@ -8,9 +8,9 @@
 %       function_handle: variable representing function
 %       x_values: array of x values
 %       h: optional, if not supplied should be set to h = 1e - 5
-%       type: If ’trapezoid’ the function needs to implement 
+%       type: If 'trapezoid' the function needs to implement 
 %              trapezoidal approximation of the integral values, 
-%              If type is ’midpoint’, the function needs to implement 
+%              If type is 'midpoint', the function needs to implement 
 %              the midpoint method.
 %              If not supplied, type is set to 'trapezoid'
 %   OUTPUT:
@@ -47,7 +47,7 @@ if (h < avgdif) == false
         error('h is larger than the average of every difference of x_i+1 - x_i');
 end
 
-% The fourth argument type is a string (or char array) with possible values ‘trapezoid’ and ’midpoint’
+% The fourth argument type is a string (or char array) with possible values 'trapezoid' and 'midpoint'
 % The function should evaluate the integral for each PAIR of SUCCESSIVE x-values 
 % and so will return length(x_values)-1 values
 if(strcmp(type, 'trapezoid') == 1)
