@@ -54,4 +54,5 @@ xlabel('n');
 % Question
 % 1) Which method would you choose and why?
 %   The first way is preferrable as the errors are significantly smaller
-%   even for larger values of h.
+%   even for larger values of h. Whereas the method using Taylor series
+%   needs high degree(at least n = 20) in order to get results with small errors.
