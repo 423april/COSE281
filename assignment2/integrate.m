@@ -28,25 +28,23 @@ function [integral] = integrate(function_handle, x_values, h, type)
 % The third argument h should be optional. If not supplied, set to 1e-5.
 % The fourth argument type should be optional. If not supplied, set to
 % 'trapezoid'.
-
-if (nargin ~= 4)
-    if ~exist('h', 'var')
-        h = 1e-5;
-    end
-    if ~exist('type', 'var')
-        type = 'trapezoid';
-    end
+if ~exist('h', 'var')
+    h = 1e-5;
+end
+if ~exist('type', 'var')
+    type = 'trapezoid';
 end
 
+
 % error handling to guarantee that h is smaller than the average of 
-% every difference of x_i+1 - x_i
+% every difference of x_i+1 - x_i, if not return error message
 difsum = 0;
 for k = 1: length(x_values) - 1
     difsum = difsum + x_values(k + 1) - x_values(k);
 end
-avgdif = difsum / (length(x_values) - 1);
+avgdif = difsum / (length(x_values) - 1); % average of every difference of x_i+1 - x_i
 if (h < avgdif) == false
-        error('h is smaller than the average of every difference of x_i+1 - x_i');
+        error('h is larger than the average of every difference of x_i+1 - x_i');
 end
 
 % The fourth argument type is a string (or char array) with possible values ‘trapezoid’ and ’midpoint’
