@@ -6,7 +6,7 @@
 %   
 %   INPUT:
 %       x: array of x values
-%       n: teh degree of the Taylor approximation. This is optional, the
+%       n: the degree of the Taylor approximation. This is optional, the
 %       default value is n = 10.
 %
 %   OUTPUT:
@@ -19,19 +19,26 @@
 %       integral = SI(x, n)
 
 function [integral] = SI(x, n)
+    % if n is not given, the default value of n is 10.
     if(nargin == 1)
         n = 10;
     end
     
+    % a is the lower end of the integral section.
+    % b is the higher end of the integral section.
+    % k is a counter for the degree.
     a = 0;
     b = 0;
     k = 0;
     
+    % computes the integral of the polynomial representation of sin(x)/x
+    % for each end of the given array.
     while (k < n)
         a = a + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(1) .^ (2 * k + 1);
         b = b + (-1) .^ k / (factorial(2 * k + 1) * (2 * k + 1)) * x(2) .^ (2 * k + 1);
         k = k + 1;
     end
     
+    % returns the integral value from a to b.
     integral = b - a;
 end
