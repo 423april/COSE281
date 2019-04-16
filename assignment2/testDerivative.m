@@ -47,7 +47,7 @@ xlabel('h');
 ylabel('SSE [log scale]');
 
 % label the error curves of each function accordingly
-legend({'x^2','cosx', 'sinx/x'},'location','northeast')
+legend({'x^2','cos(x)', 'sin(x)/x'},'location','northeast')
 
 % Questions
 % 1) Why do the error curves first go down then up again?
@@ -62,7 +62,11 @@ legend({'x^2','cosx', 'sinx/x'},'location','northeast')
 %   with error less than 10^(-15).
 % 2) Why do you think that the error curves for the three functions are
 % different?
-%   The error curves of the three functions are different as the different
-%   values of the functions produce arbitrarily but somewhat
-%   deterministically different error values since the precision and
-%   accuracy of floating point arithmetic are limited.
+%   The error occurs because the true derivative value is different from
+%   the numeric derivative. If the derivative changes with small
+%   differences in the x value, the error becomes higher. The acceleration
+%   of each function x^2, cos(x), sin(x)/x is 2, -cos(x), ((x^2 - 2)*sin(x)
+%   + 2*x*cos(x))/x^3 respectively. In the given interval, 0.001 to 2, the
+%   max acceleration(absolute value) is 2, 1, (approximate)0.33. Thus, the
+%   error of the numeric derivation of x^2 is largest, followed by cos(x)
+%   and sin(x)/x. 
