@@ -63,7 +63,7 @@ if strcmp(type, 'trapezoid') == 1
         area(i) = 0;
         % compute the area of each the trapezoid with height h, and add the
         % area into area(i)
-        for j = x_values(i): h : x_values(i+1)
+        for j = x_values(i): h : x_values(i + 1)
             area(i) = area(i) + (h ./ 2 .* (function_handle(j + h) + function_handle(j))); 
         end
     end
@@ -76,8 +76,8 @@ elseif strcmp(type, 'midpoint') == 1
     for i = 1 : length(x_values) - 1
         % compute the area of boxes with length h, height function_handle(midpoint)
         % and add the area of the box into area(i)
-        for j = x_values(i): h: x_values(i+1)
-            area(i) = area(i) + (h * function_handle(((j + h) + j)/2));
+        for j = x_values(i): h: x_values(i + 1)
+            area(i) = area(i) + (h * function_handle((j + h / 2));
         end
     end
     % return array with length(x_values) - 1 values
