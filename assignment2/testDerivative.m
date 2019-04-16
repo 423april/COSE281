@@ -62,11 +62,12 @@ legend({'x^2','cos(x)', 'sin(x)/x'},'location','northeast')
 %   with error less than 10^(-15).
 % 2) Why do you think that the error curves for the three functions are
 % different?
-%   The error occurs because the true derivative value is different from
-%   the numeric derivative. If the derivative changes drastically with small
-%   differences in the x value, the error becomes higher. The acceleration
-%   of each function x^2, cos(x), sin(x)/x is 2, -cos(x), ((x^2 - 2)*sin(x)
-%   + 2*x*cos(x))/x^3 respectively. In the given interval, 0.001 to 2, the
-%   max acceleration(absolute value) is 2, 1, (approximate)0.33. Thus, the
-%   error of the numeric derivation of x^2 is largest, followed by cos(x)
-%   and sin(x)/x. 
+%   In combination with arbitrary errors from floating point calculations,
+%   the error curves are different because the true derivative value is
+%   different from the numeric derivative. The more the derivative changes
+%   with small differences in the x value, the greater the error. The
+%   accelerations of functions x^2, cos(x), sin(x)/x are 2, -cos(x), ((x^2
+%   - 2)*sin(x) + 2*x*cos(x))/x^3 respectively. In the given interval
+%   [0.001, 2], the maximum accelerations(absolute value) are 2,
+%   approximately 1 and approximately 0.33. Thus, the error of the numeric
+%   derivation of x^2 is largest, followed by cos(x) and sin(x)/x.

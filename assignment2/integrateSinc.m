@@ -53,7 +53,9 @@ xlabel('n');
 
 % Question
 % 1) Which method would you choose and why?
-%   The first method is preferable as the errors are significantly smaller
-%   even for larger values of h, whereas the method which uses the Taylor
-%   series approximation requires the Taylor approximation to be of a high
-%   degree (at least n = 18) in order to obtain results with small errors.
+%   Given that the actual integral is approximately 1.12509 (6 s.f.), the
+%   first method is preferable as the errors are significantly smaller even
+%   for larger values of h, whereas the method which uses the Taylor series
+%   approximation requires the Taylor approximation to be of a high degree
+%   in order to obtain results with small errors, in addition to the fact
+%   that the errors are extremely large for smaller degrees.

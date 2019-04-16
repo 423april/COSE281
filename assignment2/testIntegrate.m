@@ -22,7 +22,7 @@ f = @(x) x.^2;
 
 % compute the definite integral for function x^2, with interval 0.001 to 2
 for k = 1 : length(x_values) - 1
-    defint(k) = x_values(k + 1) .^ 3 .* (1/3) - x_values(k) .^ 3 .* (1/3);
+    defint(k) = x_values(k + 1) .^ 3 / 3 - x_values(k) .^ 3 / 3;
 end
 
 % plot the trapezoid integration for  f(x) = x^2
@@ -52,8 +52,8 @@ legend({'trapezoid','midpoint'},'location','northeast')
 %   As h becomes smaller, the discrepancy caused by the overestimation and
 %   underestimation of the area bounded by the curve and the x-axis
 %   decreases since the area covered by the rectangles and trapezoids
-%   better reflects the actual area, which increases the accuracy of the
-%   estimation.
+%   begins to better reflect the actual area, which increases the accuracy
+%   of the estimation.
 % 2) Which integration method is better?
 %   Although the plots do no seem to show the difference of the two SSEs on
 %   first sight, upon magnification the presence of two lines can be
