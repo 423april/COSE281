@@ -30,7 +30,7 @@ for i = 1 : length(h)
     err1(i) = sum((defint - integrate(f, x_values, h(i), 'trapezoid')) .^ 2);
 end
 % plots err1 in a LOG plot
- semilogy(err1);
+ semilogy(h, err1);
 
 % display grid lines, label x & y-axes, and retain plot in current axes
 grid on
@@ -42,7 +42,7 @@ for i = 1 : length(h)
     err2(i) = sum((defint - integrate(f, x_values, h(i), 'midpoint')) .^ 2);
 end
 % plots err2 in a LOG plot
- semilogy(err2);
+ semilogy(h, err2);
 
 % shows which line is which function's error curve
 legend({'trapezoid','midpoint'},'location','northeast')
