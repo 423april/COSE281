@@ -59,5 +59,5 @@ legend({'trapezoid','midpoint'},'location','northeast')
 %   first sight, upon magnification the presence of two lines can be
 %   confirmed. The trapezoidal integration method has slightly higher error
 %   than the midpoint integration method. Thus, the midpoint integration
-%   method is better.
+%   method is marginally better in this case.
 

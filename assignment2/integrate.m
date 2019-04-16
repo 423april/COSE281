@@ -77,7 +77,7 @@ elseif strcmp(type, 'midpoint') == 1
         % compute the area of boxes with length h, height function_handle(midpoint)
         % and add the area of the box into area(i)
         for j = x_values(i): h: x_values(i + 1)
-            area(i) = area(i) + (h * function_handle((j + h / 2));
+            area(i) = area(i) + (h * function_handle((j + h / 2)));
         end
     end
     % return array with length(x_values) - 1 values
