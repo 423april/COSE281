@@ -63,7 +63,7 @@ legend({'x^2','cos(x)', 'sin(x)/x'},'location','northeast')
 % 2) Why do you think that the error curves for the three functions are
 % different?
 %   The error occurs because the true derivative value is different from
-%   the numeric derivative. If the derivative changes with small
+%   the numeric derivative. If the derivative changes drastically with small
 %   differences in the x value, the error becomes higher. The acceleration
 %   of each function x^2, cos(x), sin(x)/x is 2, -cos(x), ((x^2 - 2)*sin(x)
 %   + 2*x*cos(x))/x^3 respectively. In the given interval, 0.001 to 2, the
