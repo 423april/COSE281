@@ -43,7 +43,6 @@ for i = 1 : size(C, 1) - 1
      Rtemp = C(exIndex, :);
      C(exIndex, :) = C(i, :);
      C(i, :) = Rtemp;
-     C
      
      % if leading coefficient is 0, abort with error
      if(C(i,i) == 0)
@@ -56,12 +55,11 @@ for i = 1 : size(C, 1) - 1
             C(j,k) = C(j,k) - div .* C(i,k);
         end
     end
-    C
 end
 
 % backward substitution
-A = C(1:size(A,1), 1:size(A,1))
-b = C(1:size(A,1), size(C,2))
+A = C(1:size(A,1), 1:size(A,1));
+b = C(1:size(A,1), size(C,2));
 
 for i = size(A,1) : -1 : 1 % 구하려는 x값의 행
     sum = 0;
@@ -70,5 +68,13 @@ for i = size(A,1) : -1 : 1 % 구하려는 x값의 행
     end
     x(i) = (b(i) - sum) ./ A(i,i);
 end
- 
+
+
+% Question b) Which part of the code (forward elimination or 
+% backward substitution) takes longest to run?
+% Forward elimination takes longer time to run. This is because forward
+% elimination has 3 for loops, causing it to have time complexity O(n^3),
+% while backward substitution has only 2 for loops, thus having time
+% complexity O(n^2).
+
 end
