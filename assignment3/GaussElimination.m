@@ -43,6 +43,7 @@ for i = 1 : size(C, 1) - 1
      Rtemp = C(exIndex, :);
      C(exIndex, :) = C(i, :);
      C(i, :) = Rtemp;
+     C
      
      % if leading coefficient is 0, abort with error
      if(C(i,i) == 0)
@@ -55,8 +56,19 @@ for i = 1 : size(C, 1) - 1
             C(j,k) = C(j,k) - div .* C(i,k);
         end
     end
-
+    C
 end
-x=C;
 
+% backward substitution
+A = C(1:size(A,1), 1:size(A,1))
+b = C(1:size(A,1), size(C,2))
+
+for i = size(A,1) : -1 : 1 % 구하려는 x값의 행
+    sum = 0;
+    for l = size(A,1) : -1 : i + 1
+        sum = sum + A(i,l) .* x(l);
+    end
+    x(i) = (b(i) - sum) ./ A(i,i);
+end
+ 
 end
