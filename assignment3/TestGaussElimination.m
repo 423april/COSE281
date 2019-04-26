@@ -44,8 +44,14 @@ xlabel('size of data');
 ylabel('execution time[seconds]');
 legend({'UserMade','BuiltIn'},'location','northeast')
 
+
 % Question c) How much faster is the built-in Matlab function 
 % than your function for each time step? Why do you think it is faster?
-
-
+% On one trial, the user defined function takes each 0.0252, 0.0083, 0.0033, 0.2945
+% seconds more than the built-in function for each size 5, 10, 100, 500.
+% You can see that as the matrix, vector size increases, the execution time
+% difference becomes greater. The '\' operator in Matlab uses several other
+% solving algorithms to solve the linear equation, such as the LU solver,
+% the triangular solver, and so on. This allows Matlab to solve a linear
+% equation in an effective way, resulting in superior execution time.
 
