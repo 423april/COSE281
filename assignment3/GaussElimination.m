@@ -61,11 +61,11 @@ end
 % ALTERNATIVE METHOD
 %____________________________
 % preallocate x to be a zero vector with the same number of variables as A.
-% x = zeros(size(A, 2), 1);
-% 
-% for i = size(C, 1) : -1 : 1
-%     x(i) = (C(i, size(C, 2)) - sum(C(i, 1 : size(A, 2)) * x)) / C(i, i);
-% end
+x = zeros(size(A, 2), 1);
+
+for i = size(C, 1) : -1 : 1
+    x(i) = (C(i, size(C, 2)) - sum(C(i, 1 : size(A, 2)) * x)) / C(i, i);
+end
 %___________________________
 
 % % let U be the new coefficients and p the new constant terms
