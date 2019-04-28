@@ -89,7 +89,7 @@ Q(1,:) = getPosition(v);
 % array to hold A * v
 R = transpose(P) * transpose(Q);
 
-% get eigenvector and eigenvaluees
+% get eigenvector and eigenvalues
 [evecs, evals] = eig(transpose(P));
 
 % plot arrows
