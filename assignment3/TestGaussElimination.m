@@ -55,4 +55,3 @@ legend({'User-made','Built-in'},'location','northeast')
 %   etc. as shown in the documentation. This allows the operation to adapt
 %   to the situation and save a lot of time, especially as the input sizes
 %   increase.
-
