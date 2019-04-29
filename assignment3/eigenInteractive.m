@@ -18,10 +18,10 @@ if nargin == 0
 
     % create a figure with axis, label x and y
     f1 = figure(1);
-    set(f1, 'Units', 'pixels', 'Position', [0 0 700 500]);
+    set(f1, 'Units', 'pixels', 'Position', [50 50 700 500]);
     axis([0 5 0 5]);
-    xlabel('x');
-    ylabel('y');
+    xlabel('x', 'Color', 'magenta');
+    ylabel('y', 'Color', 'magenta');
     hold on;
 
     % these variables hold the three impoint handles
@@ -106,16 +106,16 @@ H3 = plot([Q(1) R(1)], [Q(2) R(2)], 'LineStyle', ':', 'LineWidth', 2, 'Color', '
 
 % handles for text: arrays for A, v and Av
 H4 = text(3,4,sprintf('$A = \\left [\\begin{array}{cc} a_1,x & a_2,x\\\\a_1,y & a_2,y\\end{array}\\right] = \\left [\\begin{array}{cc} %.02f & %.02f\\\\%.02f & %.02f\\end{array}\\right ]$',P(1,1),P(2,1),P(1,2),P(2,2)),'Interpreter','Latex'); 
-H5 = text(3,3.5,sprintf('$v = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', Q(1), Q(2)), 'Interpreter', 'Latex');
-H6 = text(3,3,sprintf('$Av = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', R(1), R(2)), 'Interpreter', 'Latex');
+H5 = text(3,3.5,sprintf('$v = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$',Q(1), Q(2)), 'Interpreter', 'Latex', 'Color', 'red');
+H6 = text(3,3,sprintf('$Av = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', R(1), R(2)), 'Interpreter', 'Latex', 'Color', 'red');
 
 % handles to mark up position and text of Av
 H7 = plot(R(1), R(2), 'r.','markersize',15);
 H8 = text(R(1), R(2), 'Av');
 
 % handles for eigenvectors e_1 and e_2
-H9 = text(4,3.5,sprintf('$e_1 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,1), evecs(2,1)), 'Interpreter', 'Latex');
-H10 = text(4,3,sprintf('$e_2 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,2), evecs(2,2)), 'Interpreter', 'Latex');
+H9 = text(4,3.5,sprintf('$e_1 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,1), evecs(2,1)), 'Interpreter', 'Latex', 'Color', 'blue');
+H10 = text(4,3,sprintf('$e_2 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,2), evecs(2,2)), 'Interpreter', 'Latex', 'Color', 'green');
 H11 = plot([0 evecs(1,1)], [0 evecs(2,1)], 'Color', 'b', 'LineStyle', ':','LineWidth', 2);
 H12 = plot([0 evecs(1,2)], [0 evecs(2,2)], 'Color', 'g', 'LineStyle', ':', 'LineWidth', 2);
 H13 = text(evecs(1,1), evecs(2,1), 'e_1');
