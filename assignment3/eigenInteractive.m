@@ -30,10 +30,14 @@ if nargin == 0
     % create first points
     a1 = impoint(gca,0.52,0);
     setString(a1,'a_1');
+    setColor(a1,'blue');
     a2 = impoint(gca,0.45,1.1);
     setString(a2,'a_2');
+    setColor(a2, 'green');
     v = impoint(gca,1.3,1.95);
     setString(v, 'v');
+    setColor(v, 'red');
+
         
     % Call subfunction
     drawInfo(a1,a2,v)
@@ -51,7 +55,7 @@ else
     % so we know that the user dragged a point
     
     % access the plot and impoint handles
-    global H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 H12 H13 H14 a1 a2 v %Av
+    global H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 H12 H13 H14 a1 a2 v 
 
     
     % remove old arrows
@@ -96,9 +100,9 @@ R = transpose(P) * transpose(Q);
 global H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 H12 H13 H14
 
 % handles for lines a1, a2 and line connecting v & Av
-H1 = plot([0 P(1,1)], [0 P(1,2)]);
-H2 = plot([0 P(2,1)], [0 P(2,2)]);
-H3 = plot([Q(1) R(1)], [Q(2) R(2)], 'LineStyle', ':');
+H1 = plot([0 P(1,1)], [0 P(1,2)], 'Color', 'blue', 'LineWidth', 3);
+H2 = plot([0 P(2,1)], [0 P(2,2)], 'Color', 'green', 'LineWidth', 3);
+H3 = plot([Q(1) R(1)], [Q(2) R(2)], 'LineStyle', ':', 'LineWidth', 2, 'Color', 'red');
 
 % handles for text: arrays for A, v and Av
 H4 = text(3,4,sprintf('$A = \\left [\\begin{array}{cc} a_1,x & a_2,x\\\\a_1,y & a_2,y\\end{array}\\right] = \\left [\\begin{array}{cc} %.02f & %.02f\\\\%.02f & %.02f\\end{array}\\right ]$',P(1,1),P(2,1),P(1,2),P(2,2)),'Interpreter','Latex'); 
@@ -106,14 +110,14 @@ H5 = text(3,3.5,sprintf('$v = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{arr
 H6 = text(3,3,sprintf('$Av = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', R(1), R(2)), 'Interpreter', 'Latex');
 
 % handles to mark up position and text of Av
-H7 = plot(R(1), R(2), 'b.','markersize',15);
+H7 = plot(R(1), R(2), 'r.','markersize',15);
 H8 = text(R(1), R(2), 'Av');
 
 % handles for eigenvectors e_1 and e_2
 H9 = text(4,3.5,sprintf('$e_1 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,1), evecs(2,1)), 'Interpreter', 'Latex');
 H10 = text(4,3,sprintf('$e_2 = \\left [\\begin{array}{cc} %.02f\\\\%.02f\\end{array}\\right ]$', evecs(1,2), evecs(2,2)), 'Interpreter', 'Latex');
-H11 = plot([0 evecs(1,1)], [0 evecs(2,1)]);
-H12 = plot([0 evecs(1,2)], [0 evecs(2,2)]);
+H11 = plot([0 evecs(1,1)], [0 evecs(2,1)], 'Color', 'b', 'LineStyle', ':','LineWidth', 2);
+H12 = plot([0 evecs(1,2)], [0 evecs(2,2)], 'Color', 'g', 'LineStyle', ':', 'LineWidth', 2);
 H13 = text(evecs(1,1), evecs(2,1), 'e_1');
 H14 = text(evecs(1,2), evecs(2,2), 'e_2');
 
