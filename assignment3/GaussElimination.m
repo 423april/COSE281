@@ -56,30 +56,18 @@ for i = 1 : size(C, 1) - 1
     end
 end
 
-% backward substitution
+% let U be the new coefficients and p the new constant terms
+U = C(1 : size(A, 1), 1 : size(A, 1));
+p = C(1 : size(A, 1), size(C, 2));
 
-% ALTERNATIVE METHOD
-%____________________________
-% preallocate x to be a zero vector with the same number of variables as A.
-x = zeros(size(A, 2), 1);
-
-for i = size(C, 1) : -1 : 1
-    x(i) = (C(i, size(C, 2)) - sum(C(i, 1 : size(A, 2)) * x)) / C(i, i);
+% "read off" the solutions into x
+for i = size(U, 1) : -1 : 1
+    sum = 0;
+    for l = size(U, 1) : -1 : i + 1
+        sum = sum + U(i, l) * x(l);
+    end
+    x(i, 1) = (p(i) - sum) / U(i, i);
 end
-%___________________________
-
-% % let U be the new coefficients and p the new constant terms
-% U = C(1 : size(A, 1), 1 : size(A, 1));
-% p = C(1 : size(A, 1), size(C, 2));
-% 
-% % "read off" the solutions into x
-% for i = size(U, 1) : -1 : 1
-%     sum = 0;
-%     for l = size(U, 1) : -1 : i + 1
-%         sum = sum + U(i, l) * x(l);
-%     end
-%     x(i, 1) = (p(i) - sum) / U(i, i);
-% end
 
 % Question
 % b) Which part of the code (forward elimination or backward
