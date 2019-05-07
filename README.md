@@ -7,4 +7,4 @@ Engineering Mathematics with Prof. Christian Wallraven (Spring 2019)
 
 ### [Assignment 3](/assignment3/Assignment3.pdf)
 
-### [Assignment 4](/assignment3/Assignment4.pdf)
+### [Assignment 4](/assignment4/Assignment4.pdf)
