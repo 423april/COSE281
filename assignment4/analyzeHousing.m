@@ -38,14 +38,26 @@ makeDescTable;
 pred = data(:, 1:13);
 price = data(:, 14);
 
-% Question a)
+%% Question a)
 % Using imagesc and corr, create a matrix of the inter-correlations of pred. How many
 % variables correlate well?
 corrPred = corr(pred);
 imagesc(corrPred);
 colorbar;
 
+%% Question b)
+% create a vector of weights
+w = 1 ./ var(data); 
+% do weighted PCA
+[wcoeff, score, latent, ~, explained] = pca(data, 'VariableWeights', w); 
+% get orthogonal eigenvectors
+coefforth = inv(diag(std(data)))* wcoeff; 
 
+% plot bi-plot to take a look at how each point is projected, and how the 
+% original 13 predictor axes have been rotated in a new, reduced coordinate
+% system
+figure('Name', 'Question B');
+biplot(score,'Scores',score,'Varlabels',housingDescription(:,1));
 
 
 
