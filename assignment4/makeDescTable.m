@@ -1,3 +1,6 @@
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 4 PROBLEM #2
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
+%
 %% Import data from text file
 % Script for importing data from the following text file:
 %

@@ -21,15 +21,23 @@ for i = 1: length(abvRow)
     data(abvRow(i), abvCol(i)) = NaN;
 end
 
-% replace all NaN values in each column of the data by the column’s
+% replace all NaN values in each column of the data by the column's
 % median value
 [nanRow, nanCol] = find(isnan(data));
 for i = 1: length(nanRow)
-    colMedian = nanmedian(data(:, nanCol(i)));
-    data(nanRow(i), nanCol(i)) = colMedian;
+    data(nanRow(i), nanCol(i)) = nanmedian(data(:, nanCol(i)));
 end
 
 % import the category names and descriptions from the text file
 % housingDescription.txt into two separate variables
-% use auto-generated script from Import Wizard
+% use auto-generated function from Import Wizard: makeDescTable.m
 makeDescTable;
+
+% split the data into 13 predictor variables pred [the first 13 columns of 
+% data] and 1 target variable price [the 14th column of the data]
+pred = data(:, 1:13);
+price = data(:, 14);
+
+
+
+
