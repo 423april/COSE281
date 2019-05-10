@@ -30,8 +30,9 @@ end
 
 % import the category names and descriptions from the text file
 % housingDescription.txt into two separate variables
-% use auto-generated function from Import Wizard: makeDescTable.m
+% use auto-generated script from Import Wizard: makeDescTable.m
 makeDescTable;
+housingDescription = table2array(housingDescription);
 
 % split the data into 13 predictor variables pred [the first 13 columns of 
 % data] and 1 target variable price [the 14th column of the data]
@@ -41,23 +42,35 @@ price = data(:, 14);
 %% Question a)
 % Using imagesc and corr, create a matrix of the inter-correlations of pred. How many
 % variables correlate well?
-corrPred = corr(pred);
-imagesc(corrPred);
-colorbar;
+% figure('Name', 'Question A');
+% corrPred = corr(pred);
+% imagesc(corrPred);
+% colorbar;
 
 %% Question b)
 % create a vector of weights
-w = 1 ./ var(data); 
+w = 1 ./ var(pred); 
 % do weighted PCA
-[wcoeff, score, latent, ~, explained] = pca(data, 'VariableWeights', w); 
+[wcoeff, score, latent, ~, explained] = pca(pred, 'VariableWeights', w); 
 % get orthogonal eigenvectors
-coefforth = inv(diag(std(data)))* wcoeff; 
+coefforth = inv(diag(std(pred)))* wcoeff; 
 
 % plot bi-plot to take a look at how each point is projected, and how the 
 % original 13 predictor axes have been rotated in a new, reduced coordinate
 % system
-figure('Name', 'Question B');
-biplot(score,'Scores',score,'Varlabels',housingDescription(:,1));
+vlabels = (housingDescription(1:13, 1))';
+figure('Name', 'Question B', 'Position', [0 0 1000 1000]);
+biplot(wcoeff(:,1:2),'scores',score(:,1:2),'varlabels', vlabels');
 
+% outliers
+% (6.158, 53.0692), (-59.8868, -5.3262), (31.0445, -26.2571)
 
+%% Question c)
+% variable 'explained' contains the percentage of the total variance
+% explained by each principal component. 
+% to explain 70% of the variance we need 3 components. we can explain 
+% 71.21187451% of variance with 3 components.
+% to explain 90% of the variance we need 9 components. we can explain 
+% 91.41254014% of variance with 9 components.
 
+%% Question d)
