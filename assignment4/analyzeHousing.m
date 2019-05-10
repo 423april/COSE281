@@ -1,6 +1,7 @@
 % COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 4 PROBLEM #2
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
+
 % clear the workspace, close all figures and clear the output window 
 % of Matlab.
 close all;
@@ -42,10 +43,14 @@ price = data(:, 14);
 %% Question a)
 % Using imagesc and corr, create a matrix of the inter-correlations of pred. How many
 % variables correlate well?
-% figure('Name', 'Question A');
-% corrPred = corr(pred);
-% imagesc(corrPred);
-% colorbar;
+figure('Name', 'Question A');
+corrPred = corr(pred);
+imagesc(corrPred);
+colorbar;
+
+% variables INDUS(3)&NOX(5), INDUS(3)&TAX(10) and RAD(9)&TAX(10) have
+% correlation coefficients of over 0.8.
+
 
 %% Question b)
 % create a vector of weights
