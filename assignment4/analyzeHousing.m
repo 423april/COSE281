@@ -38,6 +38,14 @@ makeDescTable;
 pred = data(:, 1:13);
 price = data(:, 14);
 
+% Question a)
+% Using imagesc and corr, create a matrix of the inter-correlations of pred. How many
+% variables correlate well?
+corrPred = corr(pred);
+imagesc(corrPred);
+colorbar;
+
+
 
 
 
