@@ -54,21 +54,26 @@ colorbar;
 
 %% Question b)
 % create a vector of weights
-w = 1 ./ var(pred); 
+w = 1 ./ var(pred);
 % do weighted PCA
 [wcoeff, score, latent, ~, explained] = pca(pred, 'VariableWeights', w); 
 % get orthogonal eigenvectors
-coefforth = inv(diag(std(pred)))* wcoeff; 
+coefforth = inv(diag(std(pred))) * wcoeff; 
 
 % plot bi-plot to take a look at how each point is projected, and how the 
 % original 13 predictor axes have been rotated in a new, reduced coordinate
 % system
 vlabels = (housingDescription(1:13, 1))';
-figure('Name', 'Question B', 'Position', [0 0 1000 1000]);
-biplot(wcoeff(:,1:2),'scores',score(:,1:2),'varlabels', vlabels');
+figure('Name', 'Question 2(b)', 'Position', [0 0 1000 1000]);
+biplot(wcoeff(:,1:3), 'Scores', score(:,1:3), 'Varlabels', vlabels');
+
+%%%%%%%%(used 3 vars)%%%%%%%%%%%%
 
 % outliers
 % (6.158, 53.0692), (-59.8868, -5.3262), (31.0445, -26.2571)
+
+
+%%%%%%%%%%%(change to indices)%%%%%%%%%%%%
 
 %% Question c)
 % variable 'explained' contains the percentage of the total variance
