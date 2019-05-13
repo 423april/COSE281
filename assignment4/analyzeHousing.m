@@ -2,8 +2,8 @@
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
 % analyzeHousing.m analyzes the data from dataForTesting.mat. It first
-% loads and cleans the data. Then does PCA on the data and performs linear
-% regression. 
+% loads and cleans the data. Then does PCA on the data, performs linear
+% regression, and calculates fit-quality for different models. 
 
 % clear the workspace, close all figures and clear the output window 
 % of Matlab.
@@ -37,10 +37,12 @@ housingDescription = table2array(housingDescription);
 pred = data(:, 1 : 13);
 price = data(:, 14);
 
-%% Question 2a)
-%   Using imagesc and corr, create a matrix of the inter-correlations of pred. How many
-%   variables correlate well?
-figure('Name', 'Question A');
+%% Question 2(a)
+%   Using imagesc and corr, create a matrix of the inter-correlations of 
+%   pred. How many variables correlate well?
+
+% create a matrix of the inter-correlations of pred
+figure('Name', 'Question 2(a)', 'Position', [830 150 600 500]);
 corrPred = corr(pred);
 imagesc(corrPred);
 colorbar;
@@ -50,7 +52,7 @@ colorbar;
 % correlation coefficients of over 0.8.
 
 
-%% Question 2b)
+%% Question 2(b)
 % create a vector of weights
 w = 1 ./ var(pred);
 % do weighted PCA
@@ -66,18 +68,21 @@ figure('Name', 'Question 2(b)', 'Position', [0 0 800 800]);
 % plots biplot with the first three principal components
 biplot(coefforth(:, 1 : 3), 'Scores', score(:, 1 : 3), 'Varlabels', vlabels');
 
+%   Can you identify “outliers” in this plot? Use the data cursor to write
+%   down a few indices of potential outliers and add them to the script.
 % the observation indices of the potential outliers are 54, 65 and 115.
 
 
-%% Question 2c)
-% variable 'explained' contains the percentage of the total variance
-% explained by each principal component. 
+%% Question 2(c)
+%   Explained contains the explained variance of each of the principal 
+%   components. How many components do you need to explain 70% of the 
+%   variance? How many to explain 90%?
 % to explain 70% of the variance we need 3 components. we can explain 
 % 71.21187451% of variance with 3 components.
 % to explain 90% of the variance we need 9 components. we can explain 
 % 91.41254014% of variance with 9 components.
 
-%% Question 2d)
+%% Question 2(d)
 % the number of components for reduction to be such that 70% is explained
 % is 3. 
 
@@ -91,10 +96,7 @@ a = P \ price;
 pca_fitqual = norm(P * a - price)
 
 
-%% Question 2e)
-%   So is this fit-quality good? Can PCA help us to select "good" dimensions
-%   for fitting our linear model?
-
+%% Question 2(e) 
 % do the full fit using all 13 dimensions of the original data pred
 P = [ones(206, 1) score(:, 1 : 13)];
 a = P \ price;
@@ -136,6 +138,8 @@ minpos = find(check == min(check));
 % note again that all norms are higher than the norm of the full model
 min(r2orig(r2orig ~= 0));
 
+%   Which dimensions consistently have the lowest residual? Can you 
+%   interpret them using the names and descriptions in the file?
 % dimensions 1, 4 and 13 consistently have the lowest residual.
 % dimension 1 (CRIM) is per capital crime rate by town, dimension 4 (CHAS)
 % is the Charles River dummy variable and dimension 13 (LSAT) is the
@@ -148,3 +152,7 @@ min(r2orig(r2orig ~= 0));
 % dimension 13 has a negative correlation to the housing prices, so we can
 % interpret that the lower percentage of lower status of the housing
 % population, higher the housing price. 
+
+
+%   So is this fit-quality good? Can PCA help us to select "good" 
+%   dimensions for fitting our linear model?
