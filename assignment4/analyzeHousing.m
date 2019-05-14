@@ -83,7 +83,7 @@ biplot(coefforth(:, 1 : 3), 'Scores', score(:, 1 : 3), 'Varlabels', vlabels');
 % Answer)
 % To explain 70% of the variance we need 3 components. We can explain 
 % 71.21187451% of variance with 3 components.
-% To explain 90% of the variance we need 9 components. We can explain 
+% To explain 90% of the variance we need 7 components. We can explain 
 % 91.41254014% of variance with 9 components.
 
 %% Question 2(d)
