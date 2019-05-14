@@ -4,112 +4,163 @@
 % kickstarter.m fits the given data about the number of funded and 
 % non-funded projects on Kickstarter from 2009 to 2016 with polynomials 
 % from degree 1 until 7 using the Vandermonde method and plots the measured 
-% data points. 
+% data points.
 
 % clear the workspace, close all figures and clear the output window 
-% of Matlab.
-close all;
-clear all;
-clc;
+% of Matlab
+close all
+clear all
+clc
 
 % define the number of funded and non-funded projects on Kickstarter from 
 % 2009 to 2016 as row vectors
-funded = [373 3772 10746 16903 19271 22233 22036 18823];
 nonfunded = [501 4825 12516 22749 24823 44325 54831 39251];
+funded = [373 3772 10746 16903 19271 22233 22036 18823];
 
-% creates figure for the non-funded projects
-figure('Name', 'Question 1: Non-funded Projects', 'Position', [100 100 600 500]);
-grid on; 
-xlim([0 10]), ylim([-5000 70000]);
-% sets the x index values to corresponding years
-xticklabels({'2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'});
+% define range of years to plot
+years = [2009 2022];
+
+
+%% Create figure for non-funded projects
+% set figure properties
+figure('Name', 'Question 1: Non-funded Projects', 'Position', [100 100 600 500])
+grid on
+xlim(years), ylim([-5000 90000])
+
+% set the x-axis values to corresponding years
+xticklabels({years(1) + 1 : 2 : years(2) + 1})
 hold on
+
+% preallocate err, the SSE for each degree
+err = zeros(7, 1);
 
 % fit the data with polynomials from degree 1 to 7 using the Vandermonde
 % method
 for i = 1 : 7
+    
+    % create A, the Vandermonde matrix
     A = [0 : 7]' .^ [0 : i];
+    
+    % solve for coefficients
     coeff = A \ nonfunded';
-    y = [0 : 0.05 : 10]' .^ [0 : i] * coeff;
-    % calculate the errors  ## not sure if it's needed ? 
+    
+    % calculate the y-values of the polynomial
+    y = [0 : 0.05 : years(2) - years(1)]' .^ [0 : i] * coeff;
+    
+    % calculate errors to measure fit quality
     err(i) = norm(A * coeff - nonfunded');
-    plot([0 : 0.05 : 10], y, 'linewidth', 2, 'displayname', sprintf('Degree %d, Error %f', i, err(i)))
-    % to use if not need error part
-    % plot([0 : 0.05 : 10], y, 'linewidth', 2, 'displayname', sprintf('Degree %d', i))
+    
+    % plot the polynomial; make the curve of the quadratic model thicker
+    if i == 2
+        plot([years(1) : 0.05 : years(2)], y, 'linewidth', 3, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
+    else
+        plot([years(1) : 0.05 : years(2)], y, 'linewidth', 0.5, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
+    end
 end
+
+% plot the measured data points for non-funded projects
+scatter([years(1) : length(nonfunded) + years(1) - 1]', [nonfunded]', 'displayname', 'Measured Data');
 
 % predict the number of non-funded projects in 2020 using the model of
 % polynomial degree 2 
 N = [0 : 7]' .^ [0 : 2];
 n_coeff = N \ nonfunded';
-n_predict = [1 8 8^2] * n_coeff;
+n_pred = [1 (2020 - years(1)) (2020 - years(1)) ^ 2] * n_coeff;
 
-% add the predicted value to the array of number of non-funded projects
-nonfunded = [nonfunded, n_predict];
+%plot prediction for the number of non-funded projects in 2020
+scatter(2020, n_pred, 'displayname', 'Prediction');
 
-% plot the measured data points for non-funded projects
-scatter([0 : 8]', nonfunded','displayname','Data'); 
 % set legend position
 legend('location', 'northwest');
 
-% creates figure for the funded projects
-figure('Name', 'Question 1: Funded Projects', 'Position', [730 100 600 500]);
-grid on;
-xlim([0 10]), ylim([-5000 70000]);
-% sets the x index values to corresponding years
-xticklabels({'2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'});
+
+%% Create figure for funded projects
+% set figure properties
+figure('Name', 'Question 1: Funded Projects', 'Position', [730 100 600 500])
+grid on
+xlim(years), ylim([-5000 40000])
+
+% set the x-axis values to corresponding years
+xticklabels({years(1) + 1 : 2 : years(2) + 1})
 hold on
 
 % fit the data with polynomials from degree 1 to 7 using the Vandermonde
 % method
 for i = 1 : 7
+    
+    % create A, the Vandermonde matrix
     A = [0 : 7]' .^ [0 : i];
+    
+    % solve for coefficients
     coeff = A \ funded';
-    y = [0 : 0.05 : 10]' .^ [0 : i] * coeff;
-    % calculate the errors  ## not sure if it's needed ? 
+    
+    % calculate the y-values of the polynomial
+    y = [0 : 0.05 : years(2) - years(1)]' .^ [0 : i] * coeff;
+    
+    % calculate errors to measure fit quality
     err(i) = norm(A * coeff - funded');
-    plot([0 : 0.05 : 10], y, 'linewidth', 2, 'displayname', sprintf('Degree %d, Error %f', i, err(i)))
-    % to use if not need error part
-    % plot([0 : 0.05 : 10], y, 'linewidth', 2, 'displayname', sprintf('Degree %d', i))
+    
+    % plot the polynomial; make the curve of the quadratic model thicker
+    if i == 2
+        plot([years(1) : 0.05 : years(2)], y, 'linewidth', 3, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
+    else
+        plot([years(1) : 0.05 : years(2)], y, 'linewidth', 0.5, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
+    end
 end
 
+% plot the measured data points for funded projects
+scatter([years(1) : length(funded) + years(1) - 1]', [funded]', 'displayname', 'Measured Data');
+
 % predict the number of funded projects in 2020 using the model of
-% polynomial degree 2 
-F = [0 : 7]' .^ [0 : 2];
-f_coeff = F \ funded';
-f_predict = [1 8 8^2] * f_coeff;
+% polynomial degree 4
+F = [0 : 7]' .^ [0 : 4];
+f_coeff = N \ funded';
+f_pred = [1 (2020 - years(1)) (2020 - years(1)) ^ 2] * f_coeff;
 
-% add the predicted value to the array of number of funded projects
-funded = [funded, f_predict];
+%plot prediction for the number of funded projects in 2020
+scatter(2020, f_pred, 'displayname', 'Prediction');
 
-% plot the measured data points for non-funded projects
-scatter([0 : 8]', funded','displayname','Data'); 
 % set legend position
 legend('location', 'northwest');
 
 %% Questions)
-%   Which of the models do you think fits the data best for each of the 
-%   two datasets? Do the degrees differ for the two datasets? 
-%   Why would they? Why would they not?
-%   Using your model as a predictor model, how many projects will be funded
-%   and non-funded in 2020?
-% Answer)
-% for the data set of non-funded projects, the model with polynomial degree
-% of 2 seems to fit the data best. while the model with polynomial degree 7
-% fits the data with no errors, it overfits. models with polynomial degrees 
-% 4 to 6 are more general than 7, but they seem to be predicting that the 
-% number of non-funded projects will decrease dramatically based on the 
-% sudden drop from 2015 to 2016. based on the steady increasing trend from 
-% 2009 to 2015, the drop in 2016 may be a singular occurence. therefore,
-% model with polynomial degree 2 seems to be the best compromise between
-% fit quality and generalizability. this model predicts that about 52335
-% projects will be funded in 2020.
-% for the data set of funded projects, the model with polynomial degree
-% of 2 seems to fit the data best. the models with polynomial degrees 6 and
-% 7 predict a sudden increase, and the models with polynomial degrees 3 and
-% 5 predict a sudden decrease. however, changes in the number of funded
-% projects in the past years do not show any sharp peaks or drops, so the
-% models' predictions seem unrealistic. the model with polynomial degree 2
-% not only generalises well but also reflects the past trend, best fitting
-% the data. based on this model, there will be about 17372 funded projects 
-% in 2020. 
+%     Which of the models do you think fits the data best for each of the
+%     two datasets? Do the degrees differ for the two datasets? Why would
+%     they? Why would they not?
+%     Using your model as a predictor model, how many projects will be
+%     funded and non-funded in 2020?
+%
+%  Answer)
+%     For non-funded projects, the quadratic model seems to "fit" the data
+%     best. While the seventh-degree polynomial model has the best fit
+%     quality overall, it shows signs of over-fitting, which indicates low
+%     generalisability. Polynomial regression models of degrees 3 to 6 
+%     show an overly drastic decrease in the number of non-funded projects
+%     based on a single drop in the number of non-funded projects in 2016.
+%     
+%     On the other hand, a quartic model appears to "fit" the data the best
+%     for funded projects. Polynomial models of other degrees predict
+%     either excessive growth or excessive decrease, whereas the quartic
+%     model follows the trend closely without extreme fluctuation.
+%     
+%     More data may be required to make accurate predictions, especially
+%     for future years, since predictions for the future in general
+%     necessarily require extrapolation beyond the range of data. Hence,
+%     the models should not be used to predict the number of funded and
+%     non-funded projects far off into the future. This is partially why
+%     the quartic model was chosen for the number of funded projects, since
+%     the given data does not justify a sudden demise of funded Kickstarter
+%     projects past 2020 as predicted by the quadratic model where the rate
+%     of decrease increases rapidly beyond the range of the data, in
+%     addition to the fact that the quartic model shows less fluctutation
+%     and has less errors.
+%     
+%     The two degrees are different as the two sets of data are not
+%     directly related, since the number of non-funded projects can change
+%     in a different way from the number of funded projects as the barrier
+%     of entry in creating a project is low and non-funded projects need
+%     not fulfil the general conditions necessary in creating a funded
+%     project. In other words, the means by which non-funded projects and
+%     funded projects are produced can be wildly dissimilar. Hence, they
+%     need not be the same and the data were used to pick an appropriate
+%     model for each of them.
