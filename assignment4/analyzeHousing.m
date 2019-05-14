@@ -70,7 +70,7 @@ figure('Name', 'Question 2(b)', 'Position', [0 0 800 800]);
 biplot(coefforth(:, 1 : 3), 'Scores', score(:, 1 : 3), 'Varlabels', vlabels');
 
 % Question)
-%   Can you identify �outliers� in this plot? Use the data cursor to write
+%   Can you identify "outliers" in this plot? Use the data cursor to write
 %   down a few indices of potential outliers and add them to the script.
 % Answer)
 % The observation indices of the potential outliers are 54, 65 and 115.
