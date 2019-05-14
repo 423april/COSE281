@@ -101,7 +101,7 @@ for i = 1 : 7
     err(i) = norm(A * coeff - funded');
     
     % plot the polynomial; make the curve of the quadratic model thicker
-    if i == 2
+    if i == 4
         plot([years(1) : 0.05 : years(2)], y, 'linewidth', 3, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
     else
         plot([years(1) : 0.05 : years(2)], y, 'linewidth', 0.5, 'displayname', sprintf('Degree: %d, Error: %.0f', i, err(i)))
@@ -114,8 +114,8 @@ scatter([years(1) : length(funded) + years(1) - 1]', [funded]', 'displayname', '
 % predict the number of funded projects in 2020 using the model of
 % polynomial degree 4
 F = [0 : 7]' .^ [0 : 4];
-f_coeff = N \ funded';
-f_pred = [1 (2020 - years(1)) (2020 - years(1)) ^ 2] * f_coeff;
+f_coeff = F \ funded';
+f_pred = [(2020 - years(1)) .^ [0 : 4]] * f_coeff;
 
 %plot prediction for the number of funded projects in 2020
 scatter(2020, f_pred, 'displayname', 'Prediction');
@@ -137,11 +137,13 @@ legend('location', 'northwest');
 %     generalisability. Polynomial regression models of degrees 3 to 6 
 %     show an overly drastic decrease in the number of non-funded projects
 %     based on a single drop in the number of non-funded projects in 2016.
+%     The model predicts 59335 non-funded projects in 2020.
 %     
 %     On the other hand, a quartic model appears to "fit" the data the best
 %     for funded projects. Polynomial models of other degrees predict
 %     either excessive growth or excessive decrease, whereas the quartic
-%     model follows the trend closely without extreme fluctuation.
+%     model follows the trend closely without extreme fluctuation. The
+%     model predicts 16181 funded projects in 2020.
 %     
 %     More data may be required to make accurate predictions, especially
 %     for future years, since predictions for the future in general
