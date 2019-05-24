@@ -9,6 +9,7 @@
 close all
 clear all
 clc
+
 % define the variables to test the function
 f = @(x1,x2) x1.^2 + x1.*cos(x1.*x2/3) + 3*x2.^2;
 xstart = [10 10]'; 
@@ -21,7 +22,7 @@ g1 = @(x1,x2) -(1/3) * x1 .* x2 .* sin(x1 .* x2/3) + cos(x1.*x2/3) + 2*x1;
 g2 = @(x1,x2) 6 * x2 - 1/3 * x1 .^2 .* sin(x1 .* x2/3);
 
 % call the functions and get results 
-[xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,xstart,lambda,tolerance,maxiter);
+[xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,xstart,lambda,tolerance,maxiter)
 
 
 %% Question
@@ -29,6 +30,11 @@ g2 = @(x1,x2) 6 * x2 - 1/3 * x1 .^2 .* sin(x1 .* x2/3);
 %   What is the value of lambda up to two digits that will result in
 %   non-convergence? Try this out yourself and insert the value of lambda 
 %   into the script.
+% try lambda = 0.34 results in nan 0.33 doesn't % not sure
+
+lambda1 = 0.34;
+[xopt1,fopt1,niter1] = gradient_descent(f,g1,g2,xstart,lambda1,tolerance,maxiter);
+
 
 
 %% Question
@@ -36,3 +42,7 @@ g2 = @(x1,x2) 6 * x2 - 1/3 * x1 .^2 .* sin(x1 .* x2/3);
 %   the value of lambda that has the minimum number of steps in order to 
 %   reach the minimum point? Try this out yourself and insert the value of 
 %   lambda into the script.
+% 0.24 = 31 % not sure
+
+lambda2 = 0.24;
+[xopt2,fopt2,niter2] = gradient_descent(f,g1,g2,xstart,lambda2,tolerance,maxiter);
