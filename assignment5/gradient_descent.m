@@ -2,7 +2,9 @@
 % STUDENT IDs: 2015320143, 2016320128, 2018320250
 % 
 % gradient_descent(f,g1,g2,xstart,lambda,tolerance,maxiterations) looks for
-% the minimum of a funtion f, given its gradient. 
+% the minimum of a function f, given its gradient. It returns an array of
+% optimal points, the function value at those points, and the number of
+% iterations taken to find the minimum.
 %
 %   INPUT:
 %       f: function handle to the definition of the function
@@ -26,7 +28,7 @@
 function [xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,...
     xstart,lambda,tolerance,maxiterations)
 
-    % choose a starting value for optimisation x1, x2 
+    % choose starting values for optimisation: x1, x2 
     x1 = xstart(1);
     x2 = xstart(2);
 
@@ -34,21 +36,24 @@ function [xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,...
     iter = 1;
 
     while iter <= maxiterations
+        % temporary variables t1, t2 to store previous values of x1, x2
         t1 = x1;
         t2 = x2;
         x1 = t1 - lambda * g1(t1,t2);
         x2 = t2 - lambda * g2(t1,t2);
+        % define variable for the squared norm of the gradient
         L2 = sqrt(g1(t1,t2)^2 + g2(t1,t2)^2);
-        if (L2 < tolerance)
+        
+        % when accepted minimum is found, break
+        if (L2 <= tolerance) % with = or not with = ?
             xoptimal = [x1 x2];
             foptimal = f(x1, x2);
             break;
         end
+        
         xoptimal = [x1 x2];
         foptimal = f(x1, x2);
         iter = iter + 1;
     end
-    
-    niterations = iter;
-    
+    niterations = iter;  
 end
