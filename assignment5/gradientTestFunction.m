@@ -9,21 +9,19 @@
 close all
 clear all
 clc
-
 % define the variables to test the function
 f = @(x1,x2) x1.^2 + x1.*cos(x1.*x2/3) + 3*x2.^2;
 xstart = [10 10]'; 
 lambda = 0.03; 
-tolerance = 1e-7, 
+tolerance = 1e-7;
 maxiter = 1000;
 
 % define the partial derivatives of f
-g1 = @(x1,x2) (-1/3)*x1*x2*sin(x1*x2./3)+cos(x1*x2./3)+2x;
-g2 = @(x1,x2) 6*x2-(1/3)*x2^2*sin(x1*x2./3);
+g1 = @(x1,x2) -(1/3) * x1 .* x2 .* sin(x1 .* x2/3) + cos(x1.*x2/3) + 2*x1;
+g2 = @(x1,x2) 6 * x2 - 1/3 * x1 .^2 .* sin(x1 .* x2/3);
 
 % call the functions and get results 
-[xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,xstart,lambda,...
-    tolerance,maxiter)
+[xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,xstart,lambda,tolerance,maxiter);
 
 
 %% Question
