@@ -39,13 +39,16 @@ function [xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,...
         x1 = t1 - lambda * g1(t1,t2);
         x2 = t2 - lambda * g2(t1,t2);
         L2 = sqrt(g1(t1,t2)^2 + g2(t1,t2)^2);
-        if(L2 < tolerance)
-           break;
+        if (L2 < tolerance)
+            xoptimal = [x1 x2];
+            foptimal = f(x1, x2);
+            break;
         end
         xoptimal = [x1 x2];
         foptimal = f(x1, x2);
         iter = iter + 1;
     end
+    
     niterations = iter;
     
 end
