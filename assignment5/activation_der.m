@@ -7,7 +7,7 @@ function out = activation_der(x,type)
         case 'tanh'
             out = sech(x).^2;
         case 'logistic'
-            out = x.*(1-x);%exp(x)./((1+exp(x)).^2);
+            out = x.*(1-x);
         case 'relu'
             out = max(zeros(size(x)),x);
         case 'perceptron'

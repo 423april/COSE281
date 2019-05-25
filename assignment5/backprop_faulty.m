@@ -41,6 +41,7 @@ function [weights,delta]=backprop_faulty(data,W,labels,lr,f,f_der)
     % get the hidden errors - remember that the LAST element is the bias,
     % which we do not need to touch here [all derivatives with respect to
     % constant weights are, of course, 0
+    for r = 1:size(data, 1)
     for j=1:size(W{1},1)
         err(j) = 0.0;
         % get all connected downstream neurons and update
@@ -58,7 +59,7 @@ function [weights,delta]=backprop_faulty(data,W,labels,lr,f,f_der)
     % weight update with inputs and errors - this now works from the front
 
     % initialize input for the first layer as data
-    inputs = data;
+    inputs = data(r, :);
 
     % loop through layers
     for i=1:2
@@ -78,6 +79,7 @@ function [weights,delta]=backprop_faulty(data,W,labels,lr,f,f_der)
             % of our matrix)
             W{i}(n,end) = W{i}(n,end)+ lr * delta{i}(n);
         end
+    end
     end
     % save the weights in different variable and return
      weights=W;

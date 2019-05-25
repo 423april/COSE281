@@ -21,22 +21,18 @@ labels = testData(:, 3) - 1;
 % note that the last column represents the bias
 weights{1} = randn(3, 3);
 weights{2} = randn(1, 4);
-% weights{1} = zeros(2, 3);
-% weights{2} = zeros(1, 3);
-%%%%%%%%%%%%%%%%%%%NOTE: Change to random after debugging%%%%%%%%%%%%%
 
 %% train for 10000 epochs with a learning rate of .01;
 % use stochastic gradient descent
 
 for epoch = 1 : 10000
-    % select a random point from the 200 datapoints in each epoch
     for i = 1 : 200
+        % select a random point from the 200 datapoints
         index = floor(rand * size(testData, 1)) + 1;
         
         % update weights, with a learning rate of 0.01
         weights = backprop_faulty(testData(index, 1 : 2), weights, labels(index), 0.01, 'logistic', 'logistic');
     end
-    
 end
 
 %% create subplot using original data
