@@ -41,44 +41,42 @@ function [weights,delta]=backprop_faulty(data,W,labels,lr,f,f_der)
     % get the hidden errors - remember that the LAST element is the bias,
     % which we do not need to touch here [all derivatives with respect to
     % constant weights are, of course, 0
-    for r=1:size(data, 1)
-        for j=1:size(W{1},1)
-            err(j) = 0.0;
-            % get all connected downstream neurons and update
-            for n=1:size(W{2},1)
-                err(j) = err(j)+W{2}(n,j) * delta{2}(n);
-            end
-            % again, weight the error by the derivative of the current output
-            % in the activation function
-            del(j)=err(j)*activation_der(O{1}(j), f_der);
+    for j=1:size(W{1},1)
+        err(j) = 0.0;
+        % get all connected downstream neurons and update
+        for n=1:size(W{2},1)
+            err(j) = err(j)+W{2}(n,j) * delta{2}(n);
         end
-        % assign errors and deltas to cell array for weight update step
-        errors{1}=err;
-        delta{1}=del;
+        % again, weight the error by the derivative of the current output
+        % in the activation function
+        del(j)=err(j)*activation_der(O{1}(j), f_der);
+    end
+    % assign errors and deltas to cell array for weight update step
+    errors{1}=err;
+    delta{1}=del;
 
-        % weight update with inputs and errors - this now works from the front
+    % weight update with inputs and errors - this now works from the front
 
-        % initialize input for the first layer as data
-        inputs = data(r,:);
+    % initialize input for the first layer as data
+    inputs = data;
 
-        % loop through layers
-        for i=1:2
-            % if we are not in the first layer, change input to output from
-            % previous layer
-            if i~=1
-                inputs = O{i-1};
+    % loop through layers
+    for i=1:2
+        % if we are not in the first layer, change input to output from
+        % previous layer
+        if i~=1
+            inputs = O{i-1};
+        end
+        % now get all connected neurons
+        for n=1:size(O{i},2)
+            % and for all inputs we have, change the weights according to
+            % the learning rate
+            for j=1:length(inputs)
+                W{i}(n,j) = W{i}(n,j)+ lr * delta{i}(n)*inputs(j);
             end
-            % now get all connected neurons
-            for n=1:size(O{i},2)
-                % and for all inputs we have, change the weights according to
-                % the learning rate
-                for j=1:length(inputs)
-                    W{i}(n,j) = W{i}(n,j)+ lr * delta{i}(n)*inputs(j);
-                end
-                % this is the update rule for the BIAS (in the LAST element
-                % of our matrix)
-                W{i}(n,end) = W{i}(n,end)+ lr * delta{i}(n);
-            end
+            % this is the update rule for the BIAS (in the LAST element
+            % of our matrix)
+            W{i}(n,end) = W{i}(n,end)+ lr * delta{i}(n);
         end
     end
     % save the weights in different variable and return

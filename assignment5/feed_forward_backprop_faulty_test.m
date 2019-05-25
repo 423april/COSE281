@@ -43,4 +43,4 @@ expected = [0];
 % weights were updated in two arrays, weights and delta
 %
 % to check where things go wrong, please look at the function inside
-[weights,delta]=backprop_faulty(data,W,expected,0.1,'logistic');
+[weights,delta]=backprop_faulty(data,W,expected,0.1,'logistic', 'logistic');

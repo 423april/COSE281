@@ -17,12 +17,12 @@ testData = table2array(testData);
 labels = testData(:, 3) - 1;
 
 % initialise a set of random weights for a neural network with a hidden
-% layer of dimensionality 2
+% layer of dimensionality 3
 % note that the last column represents the bias
-% weights{1} = randn(3, 3);
-% weights{2} = randn(1, 4);
-weights{1} = zeros(2, 3);
-weights{2} = zeros(1, 3);
+weights{1} = randn(3, 3);
+weights{2} = randn(1, 4);
+% weights{1} = zeros(2, 3);
+% weights{2} = zeros(1, 3);
 %%%%%%%%%%%%%%%%%%%NOTE: Change to random after debugging%%%%%%%%%%%%%
 
 %% train for 10000 epochs with a learning rate of .01;
@@ -30,10 +30,13 @@ weights{2} = zeros(1, 3);
 
 for epoch = 1 : 10000
     % select a random point from the 200 datapoints in each epoch
-    index = floor(rand * size(testData, 1)) + 1;
+    for i = 1 : 200
+        index = floor(rand * size(testData, 1)) + 1;
+        
+        % update weights, with a learning rate of 0.01
+        weights = backprop_faulty(testData(index, 1 : 2), weights, labels(index), 0.01, 'logistic', 'logistic');
+    end
     
-    % update weights, with a learning rate of 0.01
-    weights = backprop_faulty(testData(index, 1 : 2), weights, labels(index), 0.01, 'logistic', 'logistic');
 end
 
 %% create subplot using original data
