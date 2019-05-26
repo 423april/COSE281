@@ -5,15 +5,15 @@ function out = activation_der(x,type)
     
     switch type
         case 'tanh'
-            out = sech(x).^2;
+            out = 1-x.^2;
         case 'logistic'
             out = x.*(1-x);
         case 'relu'
-            out = max(zeros(size(x)),x);
+            out = x(x > 0);
         case 'perceptron'
             out = zeros(size(x));
         case 'linear'
-            out = 1;
+            out = ones(size(x));
         otherwise
             error(['do not know type ' type])
     end

@@ -1,8 +1,8 @@
 %% feed_forward function for a standard one-hidden-layer net
 % function adds the bias term internally to the last element!
 %
-% TODO: fix function!
-% TODO: add functionality to pass argument for activation function
+% TODO: fix function! (done)
+% TODO: add functionality to pass argument for activation function (done)
 function O = feed_forward_faulty(X,W,f)
 if nargin == 2
     f = 'logistic';

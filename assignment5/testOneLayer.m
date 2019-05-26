@@ -14,7 +14,7 @@ clc
 % load the data from testData.txt and change the labels
 getTestData;
 testData = table2array(testData);
-labels = testData(:, 3) - 1;
+labels = ~(testData(:, 3) - 1);
 
 % initialise a set of random weights for a neural network with a hidden
 % layer of dimensionality 3
@@ -22,10 +22,10 @@ labels = testData(:, 3) - 1;
 weights{1} = randn(3, 3);
 weights{2} = randn(1, 4);
 
-%% train for 10000 epochs with a learning rate of .01;
+%% train for 10000 epochs with a learning rate of .01
 % use stochastic gradient descent
-
 for epoch = 1 : 10000
+    % perform stochastic gradient descent
     for i = 1 : 200
         % select a random point from the 200 datapoints
         index = floor(rand * size(testData, 1)) + 1;
@@ -39,8 +39,8 @@ end
 subplot(1, 2, 1);
 
 % determine which class the points belong to
-cross_org = [testData(labels > 0.1, 1) testData(labels > 0.1, 2)];
-circle_org = [testData(labels < 0.1, 1) testData(labels < 0.1, 2)];
+cross_org = [testData(labels == 0, 1) testData(labels == 0, 2)];
+circle_org = [testData(labels == 1, 1) testData(labels == 1, 2)];
 
 % create scatter plot
 scatter(cross_org(:, 1), cross_org(:, 2) , 'r', 'x')
@@ -55,8 +55,8 @@ subplot(1, 2, 2);
 output = feed_forward_faulty(testData(:, 1 : 2), weights, 'logistic');
 
 % predict which class the points belong to
-cross_pred = [testData(output{2} > 0.5, 1) testData(output{2} > 0.5, 2)];
-circle_pred = [testData(output{2} < 0.5, 1) testData(output{2} < 0.5, 2)];
+cross_pred = [testData(output{2} < 0.5, 1) testData(output{2} < 0.5, 2)];
+circle_pred = [testData(output{2} > 0.5, 1) testData(output{2} > 0.5, 2)];
 
 % create scatter plot for predictions
 scatter(cross_pred(:, 1), cross_pred(:, 2), 'r', 'x')
