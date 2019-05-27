@@ -19,6 +19,7 @@ labels = ~(testData(:, 3) - 1);
 % initialise a set of random weights for a neural network with a hidden
 % layer of dimensionality 3
 % note that the last column represents the bias
+rng('shuffle')
 weights{1} = randn(3, 3);
 weights{2} = randn(1, 4);
 

@@ -9,7 +9,7 @@ function out = activation_der(x,type)
         case 'logistic'
             out = x.*(1-x);
         case 'relu'
-            out = x(x > 0);
+            out = double(x > 0);
         case 'perceptron'
             out = zeros(size(x));
         case 'linear'
