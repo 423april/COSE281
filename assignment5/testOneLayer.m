@@ -45,9 +45,11 @@ circle_org = [testData(labels == 1, 1) testData(labels == 1, 2)];
 
 % create scatter plot
 scatter(cross_org(:, 1), cross_org(:, 2) , 'r', 'x')
+grid on 
 hold on
 scatter(circle_org(:, 1), circle_org(:, 2), 'g')
-title('Original')
+axis([-1 1 -1.7 1.7]);
+title('Original data')
 
 %% create subplot using predictions
 subplot(1, 2, 2);
@@ -61,6 +63,8 @@ circle_pred = [testData(output{2} > 0.5, 1) testData(output{2} > 0.5, 2)];
 
 % create scatter plot for predictions
 scatter(cross_pred(:, 1), cross_pred(:, 2), 'r', 'x')
+grid on 
 hold on
 scatter(circle_pred(:, 1), circle_pred(:, 2), 'g')
-title('Predicted')
+axis([-1 1 -1.7 1.7]);
+title('Predicted data')
