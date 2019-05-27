@@ -31,9 +31,8 @@ function [xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,...
     % choose starting values for optimisation: x1, x2 
     x1 = xstart(1);
     x2 = xstart(2);
-
-    % iteration number
-
+    
+    % loop to find minimum with gradient descent
     for  iter = 1 : maxiterations
         % temporary variables t1, t2 to store previous values of x1, x2
         t1 = x1;
