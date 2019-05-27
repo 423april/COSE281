@@ -33,27 +33,28 @@ function [xoptimal,foptimal,niterations] = gradient_descent(f,g1,g2,...
     x2 = xstart(2);
 
     % iteration number
-    iter = 1;
 
-    while iter <= maxiterations
+    for  iter = 1 : maxiterations
         % temporary variables t1, t2 to store previous values of x1, x2
         t1 = x1;
         t2 = x2;
+        
+        % update x1, x2 with gradient descent
         x1 = t1 - lambda * g1(t1,t2);
         x2 = t2 - lambda * g2(t1,t2);
+        
         % define variable for the squared norm of the gradient
         L2 = sqrt(g1(t1,t2)^2 + g2(t1,t2)^2);
         
         % when accepted minimum is found, break
-        if (L2 <= tolerance) % with = or not with = ?
-            xoptimal = [x1 x2];
-            foptimal = f(x1, x2);
+        if L2 <= tolerance
             break;
         end
-        
-        xoptimal = [x1 x2];
-        foptimal = f(x1, x2);
-        iter = iter + 1;
     end
+    
+    % return values for xoptimal, foptimal and niterations
+    xoptimal = [x1 x2];
+    foptimal = f(x1, x2);
     niterations = iter;  
+    
 end
