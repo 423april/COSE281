@@ -21,8 +21,8 @@ W{2}=[0.25, 0.49, 0.39, 0.44];
 % think about the dimensions first: how many dimensions do we get from each
 % layer as output??
 %
-% size(O{1})=?
-% size(O{2})=?
+% size(O{1})= 1*3
+% size(O{2})= 1*1
 %
 % to check where things go wrong, please look at the function inside
 O = feed_forward_faulty(data,W);
