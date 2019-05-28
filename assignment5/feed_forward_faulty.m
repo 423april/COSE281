@@ -1,3 +1,6 @@
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 5 PROBLEM #2
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
+
 %% feed_forward function for a standard one-hidden-layer net
 % function adds the bias term internally to the last element!
 %
