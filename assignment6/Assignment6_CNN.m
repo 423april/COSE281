@@ -1,3 +1,16 @@
+% COSE281 ENGINEERING MATHEMATICS 2019 ASSIGNMENT 6
+% STUDENT IDs: 2015320143, 2016320128, 2018320250
+% 
+% Note:
+%   Understandably, the original comments below may no longer reflect the
+%   actual code. Where drastic changes have been made, comments have been
+%   added to explain the new code.
+%   
+%   The CIFAR-10 dataset was used to complete the task.
+%   (Krizhevsky, Alex. 2009. “Learning Multiple Layers of Features from
+%   Tiny Images.”)
+
+
 %% Create Simple Deep Learning Network for Classification
 %% STOLEN FROM MATLAB's OWN DEMO!!!
 % This example shows how to create and train a simple convolutional neural
@@ -6,7 +19,6 @@
 % image recognition.
 %
 % The example demonstrates how to: 
-%
 % * Load and explore image data.
 % * Define the network architecture.
 % * Specify training options.
@@ -25,19 +37,41 @@ clc
 % large image data, including data that does not fit in memory, and
 % efficiently read batches of images during training of a convolutional
 % neural network.
-digitDatasetPath = fullfile(matlabroot,'toolbox','nnet','nndemos',...
-    'nndatasets','DigitDataset');
-digitData = imageDatastore(digitDatasetPath,...
-    'IncludeSubfolders',true,'LabelSource','foldernames');
 
+
+% images.mat is a small subset of the CIFAR-10 dataset that has been
+% grayscaled and resized. The following 5 categories of sample size > 1000
+% have been extracted. Label numberings were preserved.
+% 
+% 0 - Airplanes
+% 3 - Cats
+% 6 - Frogs
+% 7 - Horses
+% 8 - Ships
+
+types = [0 3 6 7 8];
+type_names = ["Airplane" "Cat" "Frog" "Horse" "Ship"];
+
+
+% In images.mat: 
+%   resized_grayscale_images: 28-by-28-by-5077 array representing CIFAR-10
+%   images that have been grayscaled and resized using a separate custom
+%   MATLAB script.
+% 
+%   labels: 5077-by-1 vector that provides the labels for each image in
+%   resized_grayscale_images.
+
+load images.mat
+images = resized_grayscale_images;
 
 %%
-% Display some of the images in the datastore.
+% Display some of the image in the datastore.
+
 figure;
-perm = randperm(10000,20);
+perm = randperm(size(images, 3),20);
 for i = 1:20
     subplot(4,5,i);
-    imshow(digitData.Files{perm(i)});
+    imshow(images(:, :, perm(i)));
 end
 
 %%
@@ -46,14 +80,13 @@ end
 % datastore contains 1000 images for each of the digits 0-9, for a total of
 % 10000 images. You can specify the number of classes in the last fully
 % connected layer of your network as the |OutputSize| argument.
-labelCount = countEachLabel(digitData)
+labelCount = array2table(sum(labels == types), 'VariableNames', type_names)
 
 %%
 % You must specify the size of the images in the input layer of the
 % network. Check the size of the first image in |digitData|. Each image is
 % 28-by-28-by-1 pixels.
-img = readimage(digitData,1);
-size(img)
+size(images(:, :, 1))
 
 %% Specify Training and Validation Sets
 % Divide the data into training and validation data sets, so that each
@@ -61,8 +94,24 @@ size(img)
 % contains the remaining images from each label. |splitEachLabel| splits
 % the datastore |digitData| into two new datastores, |trainDigitData| and
 % |valDigitData|.
-trainNumFiles = 750;
-[trainDigitData,valDigitData] = splitEachLabel(digitData,trainNumFiles,'randomize');
+
+% approximately 90% of images are used for training; the rest are used for
+% validation
+trainNumFiles = floor(0.9 * size(images, 3));
+
+% generate random indices to use for training
+random_indices = randperm(size(images, 3));
+
+% generate training and validation data using random indices
+
+% since trainNetwork takes a 4-D numeric array (explained in further detail
+% below), the data is reshaped to denote the presence of 1 channel.
+trainImageData = reshape([images(:, :, random_indices(1 : trainNumFiles))], [28 28 1 trainNumFiles]);
+valImageData = reshape([images(:, :, random_indices(trainNumFiles + 1 : end))], [28 28 1 size(images, 3) - trainNumFiles]);
+
+% define categorical labels for later use
+trainCategories = categorical(labels(random_indices(1 : trainNumFiles)));
+valCategories = categorical(labels(random_indices(trainNumFiles + 1 : end)));
 
 %% Define Network Architecture
 % Define the convolutional neural network architecture.
@@ -85,7 +134,7 @@ layers = [
     batchNormalizationLayer
     reluLayer
     
-    fullyConnectedLayer(10)
+    fullyConnectedLayer(5)
     softmaxLayer
     classificationLayer];
 
@@ -188,7 +237,7 @@ layers = [
 % off the command window output.
 options = trainingOptions('sgdm',...
     'MaxEpochs',3, ...
-    'ValidationData',valDigitData,...
+    'ValidationData',{valImageData valCategories},... % ValidationData has been changed into a custom cell array
     'ValidationFrequency',30,...
     'Verbose',true,...
     'Plots','training-progress','ExecutionEnvironment','cpu');
@@ -208,19 +257,27 @@ options = trainingOptions('sgdm',...
 % <docid:nnet_examples.mw_507458b6-14c3-4a31-884c-9f2119ff7e05>. The loss
 % is the <docid:nnet_ref.bu80p30-3 cross-entropy loss>. The accuracy is the
 % percentage of images that the network classifies correctly.
-net = trainNetwork(trainDigitData,layers,options);
 
 
+% (From MATLAB Documentation)
+%       trainedNet = trainNetwork(X,Y,layers,options) trains a network for
+%       image classification and regression problems. X contains the
+%       predictor variables and Y contains the categorical labels or
+%       numeric responses.
+net = trainNetwork(trainImageData, trainCategories,layers,options);
 
 %% Classify Validation Images and Compute Accuracy
 % Predict the labels of the validation data using the trained network, and
 % calculate the final validation accuracy. Accuracy is the fraction of
 % labels that the network predicts correctly. In this case, more than 99%
 % of the predicted labels match the true labels of the validation set.
-predictedLabels = classify(net,valDigitData);
-valLabels = valDigitData.Labels;
+
+% The accuracy of the neural network (usually greater than 60%) is
+% significantly lower than 99%, but nevertheless markedly greater than
+% chance (20%). Considering the fact that the images have been grayscaled
+% and resized and that a very generic CNN architecture was used, we
+% concluded that the results were acceptable.
+predictedLabels = classify(net,valImageData);
+valLabels = valCategories;
 
 accuracy = sum(predictedLabels == valLabels)/numel(valLabels)
-
-
-
