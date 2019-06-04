@@ -8,7 +8,7 @@
 %   
 %   The CIFAR-10 dataset was used to complete the task.
 %   (Krizhevsky, Alex. 2009. “Learning Multiple Layers of Features from
-%   Tiny Images.”)
+%   Tiny Images.�?)
 
 
 %% Create Simple Deep Learning Network for Classification
@@ -236,7 +236,7 @@ layers = [
 % update the network weights. Turn on the training progress plot, and turn
 % off the command window output.
 options = trainingOptions('sgdm',...
-    'MaxEpochs',3, ...
+    'MaxEpochs',3, ... % change the nubmer of epochs to 10 to increase accuracy
     'ValidationData',{valImageData valCategories},... % ValidationData has been changed into a custom cell array
     'ValidationFrequency',30,...
     'Verbose',true,...
@@ -276,7 +276,12 @@ net = trainNetwork(trainImageData, trainCategories,layers,options);
 % significantly lower than 99%, but nevertheless markedly greater than
 % chance (20%). Considering the fact that the images have been grayscaled
 % and resized and that a very generic CNN architecture was used, we
-% concluded that the results were acceptable.
+% concluded that the results were acceptable. Increasing the number of
+% epochs up to 10 increases the accuracy (to above 65%). Doubling the size
+% of the dataset also increases the accuracy (to approximately 75% when
+% combined with an increase in the number of epochs). Increasing the depth
+% of the CNN significantly or making minimal changes to the network
+% structure did not lead to significant changes in accuracy.
 predictedLabels = classify(net,valImageData);
 valLabels = valCategories;
 
