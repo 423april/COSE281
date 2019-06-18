@@ -7,8 +7,8 @@
 %   added to explain the new code.
 %   
 %   The CIFAR-10 dataset was used to complete the task.
-%   (Krizhevsky, Alex. 2009. “Learning Multiple Layers of Features from
-%   Tiny Images.”)
+%   (Krizhevsky, Alex. 2009. "Learning Multiple Layers of Features from
+%   Tiny Images.")
 
 
 %% Create Simple Deep Learning Network for Classification
