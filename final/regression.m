@@ -37,7 +37,7 @@ sse = sum((test(:,8) - pred) .^ 2)
 
 
 % linear regression using matlab internal function
-lm = fitlm(ndata(:, 1:7), ndata(:,8))
+lm = fitlm(data(:, 1:7), data(:,8))
 
 %% Data Analysis
 % In the data above, we predicted the number of rings an abalone will have.
@@ -56,8 +56,9 @@ lm = fitlm(ndata(:, 1:7), ndata(:,8))
 % weight are powerful features.
 % Diameter and Shell weight also have significantly high positive 
 % coefficient values. These are meaningful features in predicting age.
-% The length had a very small coefficient, and high p-value, that means
-% length is not a meaningful feature in determining the age of the abalone.
+% The length had a very small coefficient, and high p-value(over 0.05),
+% which means length is not a meaningful feature in determining 
+% the age of the abalone.
 
 % From the linear model we made, we can infer that older abalone have
 % heavier shells with large diameters. Furthermore, as abaolne grow old,
