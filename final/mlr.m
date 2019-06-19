@@ -164,7 +164,7 @@ in_order_of_magnitude = [predictors ordered(:, 1) - 1 ordered(:, 2)]
 % Of all variables, the length of the abalone mattered the least according
 % to the standardised regression coefficients. Moreover, the p-value was
 % very high at 0.39, which seems to suggest that it is very likely that
-% length does not have much of an effect on the age of the abalone.
+% length cannot predict the age of abalone well.
 %
 % Likewise, height was not very important in determining the age of the
 % abalone. In contrast, the diameter, perpendicular to the length of the
