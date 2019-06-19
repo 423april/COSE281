@@ -32,9 +32,9 @@ age = table2array(abalone(:, 9)) + 1.5;
 %% Multiple Linear Regression (All Data)
 
 % obtain the matrix of correlations
+figure('Position', [100 200 400 400])
 correlations = corr([data age]);
 imagesc(correlations)
-figure(2)
 
 % check variable with the strongest correlation with age
 max_corr = max(correlations(1 : 7, end))
@@ -50,6 +50,7 @@ max_corr = max(correlations(1 : 7, end))
 
 % use built-in functions to fit data to a linear model with all data
 model = fitlm(data_table);
+figure('Position', [600 100 600 500])
 plot(model)
 
 % Linear regression model:
