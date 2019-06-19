@@ -1,0 +1,22 @@
+COSE281 ENGINEERING MATHEMATICS 2019 FINAL PROJECT
+STUDENT IDs: 2015320143, 2016320128, 2018320250
+
+**********Abalone Age Prediction and Analysis**********
+
+Various methods were employed to predict the age of abalone using the given variables.
+The root mean squared error was the primary metric with which performance evaluation was done.
+
+The results showed that the best models could predict the age of abalone with an error of approximately 2 years.
+
+abalone.mat contains the imported data.
+network.mat contains a very simple pre-trained network for ANN_self.m (to simulate results at the time of running).
+mlr.m uses multiple linear regression to predict the age of abalone.
+ANN.m and ANN_self.m use artificial neural networks (ANNs) to do the same.
+pc_analysis provides visualisation and some insight into the variables
+abalone.names and abalone.data contain the original explanations and data from the creators of the original dataset respectively.
+
+Additional explanation can be found within the scripts themselves.
+
+
+The dataset was retrieved from the UCI Machine Learning Repository.
+(Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science.)
