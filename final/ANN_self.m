@@ -31,6 +31,7 @@ age = table2array(abalone(:, 9)) + 1.5;
 sz_training = floor(0.7 * size(data, 1));
 
 % generate random indices to use for training
+rng('shuffle')
 random_indices = randperm(size(data, 1));
 
 % segment the data into training and validation sets using random indices
@@ -42,8 +43,6 @@ training_age = age(random_indices(1 : sz_training));
 validation_age = age(random_indices(sz_training + 1 : end));
 
 % initialise weights
-rng('shuffle')
-
 % the network has 10 nodes in the hidden layer
 % the number of hidden layers can be adjusted freely (min. 1)
 weights{1} = randn(10, 8);
