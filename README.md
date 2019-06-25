@@ -14,4 +14,4 @@ Engineering Mathematics with Professor Christian Wallraven at Korea University (
 ### [Assignment 6](/assignment-pdfs/Assignment6.pdf)
 
 ### [Final Project](/final)
-Various methods were employed to predict the age of abalone using the given variables.
+> Various methods were employed to predict the age of abalone using the given variables.
