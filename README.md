@@ -1,5 +1,5 @@
 # COSE281
-Engineering Mathematics with Prof. Christian Wallraven (Spring 2019)
+Engineering Mathematics with Professor Christian Wallraven at Korea University (Spring 2019)
 
 ### [Assignment 1](/assignment-pdfs/Assignment1.pdf)
 
@@ -12,3 +12,6 @@ Engineering Mathematics with Prof. Christian Wallraven (Spring 2019)
 ### [Assignment 5](/assignment-pdfs/Assignment5.pdf)
 
 ### [Assignment 6](/assignment-pdfs/Assignment6.pdf)
+
+### Final Project
+Various methods were employed to predict the age of abalone using the given variables.
